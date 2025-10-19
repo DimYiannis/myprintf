@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/19 21:45:56 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/19 21:57:02 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ft_printf(const char *type, ...)
 			}
 			else if (type[i] == 'p')
 			{
-                len = ft_strlen(va_arg(args, char *));
+                void *ptr = va_arg(args, void *);
 				count += len;
 				while (j < len)
 				{
