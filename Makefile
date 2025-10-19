@@ -20,7 +20,7 @@ ft_lstadd_front_bonus.c ft_lstclear_bonus.c ft_lstdelone_bonus.c ft_lstiter_bonu
 ft_lstlast_bonus.c ft_lstmap_bonus.c
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
 	
-%.o: %.c
+%.o: %.c myheader.h
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 $(NAME): $(OBJ)
