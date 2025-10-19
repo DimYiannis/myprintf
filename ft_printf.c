@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/19 16:17:06 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/19 21:45:56 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_printf(const char *type, ...)
 				count += len;
 				while (j < len)
 				{
-					write(1, va_arg(args, char *)[j], 1);
+					write(1, &va_arg(args, char *)[j], 1);
 					j++;
 				}
 				i++;
@@ -46,11 +46,13 @@ int	ft_printf(const char *type, ...)
 			}
 			else if (type[i] == 'u')
 			{
-				len = ft_strlen(ft_unsigneditoa(va_arg(args, size_t)));
+                unsigned int n = va_arg(args, unsigned int);
+                char *tmp = ft_unsigneditoa(n);
+				len = ft_strlen(tmp);
 				count += len;
 				while (j < len)
 				{
-					write(1, va_arg(args, char *)[j], 1);
+					write(1, &tmp[j], 1);
 					j++;
 				}
 				i++;
@@ -71,7 +73,7 @@ int	ft_printf(const char *type, ...)
 				count += len;
 				while (j < len)
 				{
-					write(1, va_arg(args, char *)[j], 1);
+					write(1, &va_arg(args, char *)[j], 1);
 					j++;
 				}
 				i++;
@@ -79,20 +81,32 @@ int	ft_printf(const char *type, ...)
 			}
 			else if (type[i] == 'c')
 			{
-				write(1, va_arg(args, char));
+                char c = (char)va_arg(args, int);
+				write(1, &c, 1);
 				count++;
 				i++;
 			}
 			else if (type[i] == 'p')
 			{
+                len = ft_strlen(va_arg(args, char *));
+				count += len;
+				while (j < len)
+				{
+					write(1, &va_arg(args, char *)[j], 1);
+					j++;
+				}
+				i++;
+                j = 0;
 			}
 			else if (type[i] == '%')
 			{
-				write(1, '%', 1);
+                char c = '%';
+				write(1, &c, 1);
 				count++;
+                i++;
 			}
 		}
-		write(1, type[i], 1);
+		write(1, &type[i], 1);
 		i++;
 		count++;
 	}
