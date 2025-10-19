@@ -6,12 +6,13 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/19 13:49:24 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/19 16:17:06 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stddef.h>
+#include "myheader.h"
 
 int	ft_printf(const char *type, ...)
 {
@@ -41,6 +42,7 @@ int	ft_printf(const char *type, ...)
 					j++;
 				}
 				i++;
+                j = 0;
 			}
 			else if (type[i] == 'u')
 			{
@@ -52,9 +54,16 @@ int	ft_printf(const char *type, ...)
 					j++;
 				}
 				i++;
+                j = 0;
 			}
 			else if (type[i] == 'x' || type[i] == 'X')
 			{
+                if (type[i] == 'x')
+                    ft_hexputnbr(va_arg(args, int), 0);
+                else
+                    ft_hexputnbr(va_arg(args, int), 1);
+                len = count_digits(va_arg(args, int));
+                count += len;
 			}
 			else if (type[i] == 's')
 			{
@@ -66,6 +75,7 @@ int	ft_printf(const char *type, ...)
 					j++;
 				}
 				i++;
+                j = 0;
 			}
 			else if (type[i] == 'c')
 			{
