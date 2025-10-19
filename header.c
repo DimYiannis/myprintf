@@ -6,14 +6,16 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/19 13:47:09 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/19 16:13:54 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <unistd.h>
 
-static int	count_digits(int n)
+unsigned int	count_digits(unsigned int n)
 {
-	int	count;
+	unsigned int	count;
 
 	if (n == 0)
 		return (1);
@@ -26,12 +28,12 @@ static int	count_digits(int n)
 	return (count);
 }
 
-char	*ft_unsigneditoa(unsigned int n)
+unsigned char	*ft_unsigneditoa(unsigned int n)
 {
-	char	*s;
-	unsigned int		len;
+	unsigned char	*s;
+	unsigned int	len;
 	unsigned int	num;
-	int		sign;
+	int				sign;
 
 	sign = 0;
 	num = n;
@@ -53,4 +55,29 @@ char	*ft_unsigneditoa(unsigned int n)
 			s[0] = '-';
 	}
 	return (s);
+}
+
+void	ft_hexputnbr(int n, int upper)
+{
+	char	*digits;
+
+	if (upper)
+		digits = "0123456789ABCDEF";
+	if (!upper)
+		digits = "0123456789abcdef";
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		ft_hexputnbr(-n, 1);
+	}
+	else if (n >= 16)
+	{
+		ft_hexputnbr(n / 16, 1);
+		write(1, &digits[n % 16], 1);
+	}
+	else
+	{
+		write(1, "0x", 2);
+		write(1, &digits[n % 16], 1);
+	}
 }
