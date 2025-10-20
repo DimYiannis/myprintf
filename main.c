@@ -3,9 +3,7 @@
 
 int main()
 {
-    char *p;
-    char c = 'l';
-    p = &c;
-    ft_printf("wanabee: %p\n", p);
-    printf("legit one: %p\n", p);
+    unsigned int c = 0x12;
+    ft_printf("wanabee: %x\n", c);
+    printf("legit: %x\n", c);
 }
