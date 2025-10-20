@@ -6,13 +6,13 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 16:09:28 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:43:44 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdint.h>
 
 unsigned int	count_digits(unsigned int n)
 {
@@ -31,7 +31,7 @@ unsigned int	count_digits(unsigned int n)
 
 char	*ft_unsigneditoa(unsigned int n)
 {
-	char	*s;
+	char			*s;
 	unsigned int	len;
 	unsigned int	num;
 
