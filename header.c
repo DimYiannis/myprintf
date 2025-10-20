@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 10:30:03 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 12:32:59 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,27 +69,19 @@ void	ft_hexputnbr(unsigned int n, int upper)
 	}
 }
 
-// void	ft_addressputnbr(uintptr_t n, int upper)
-// {
-// 	char	*digits;
+void	ft_addressputnbr(uintptr_t n)
+{
+	char	*digits;
 
-// 	if (upper)
-// 		digits = "0123456789ABCDEF";
-// 	if (!upper)
-// 		digits = "0123456789abcdef";
-// 	if (n < 0)
-// 	{
-// 		write(1, "-", 1);
-// 		ft_hexputnbr(-n, 1);
-// 	}
-// 	else if (n >= 16)
-// 	{
-// 		ft_hexputnbr(n / 16, 1);
-// 		write(1, &digits[n % 16], 1);
-// 	}
-// 	else
-// 	{
-// 		write(1, "0x", 2);
-// 		write(1, &digits[n % 16], 1);
-// 	}
-// }
+	digits = "0123456789abcdef";
+	if (n >= 16)
+	{
+		ft_addressputnbr(n / 16);
+		write(1, &digits[n % 16], 1);
+	}
+	else
+	{
+		write(1, "0x", 2);
+		write(1, &digits[n % 16], 1);
+	}
+}
