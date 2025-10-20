@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 22:08:05 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 22:11:16 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,26 +105,13 @@ int	ft_printf(const char *type, ...)
 		{
 			i++;
 			if (type[i] == 'd' || type[i] == 'i')
-			{
-				len = int_case(args);
-				count += len;
-			}
+				count += int_case(args);
 			else if (type[i] == 'u')
-			{
-				len = unsigned_case(args);
-				count += len;	
-			}
+				count += unsigned_case(args);	
 			else if (type[i] == 'x' || type[i] == 'X')
-			{
-				len = hex_case(args, type[i]);
-				count += len;
-			}
+				count += hex_case(args, type[i]);
 			else 
-			{
-				len = rest_cases(args, type[i]);
-				count += len;
-			}
-			i++;
+				count += rest_cases(args, type[i]);
 		}
 		else
 		{
