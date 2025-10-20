@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.all
+LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC =  ft_printf.c header.c
 OBJ = $(SRC:.c=.o)
