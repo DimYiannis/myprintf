@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/19 21:57:02 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 10:45:23 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int	ft_printf(const char *type, ...)
 			else if (type[i] == 'x' || type[i] == 'X')
 			{
                 if (type[i] == 'x')
-                    ft_hexputnbr(va_arg(args, int), 0);
+                    ft_hexputnbr(va_arg(args, unsigned int), 0);
                 else
-                    ft_hexputnbr(va_arg(args, int), 1);
-                len = count_digits(va_arg(args, int));
+                    ft_hexputnbr(va_arg(args, unsigned int), 1);
+                len = count_digits(va_arg(args, unsigned int));
                 count += len;
 			}
 			else if (type[i] == 's')
@@ -88,15 +88,12 @@ int	ft_printf(const char *type, ...)
 			}
 			else if (type[i] == 'p')
 			{
-                void *ptr = va_arg(args, void *);
+               const void *ptr = va_arg(args, void *);
+			   const char *s = ptr;
+				len = ft_strlen(s);
 				count += len;
-				while (j < len)
-				{
-					write(1, &va_arg(args, char *)[j], 1);
-					j++;
-				}
+				write(1, &s, len);
 				i++;
-                j = 0;
 			}
 			else if (type[i] == '%')
 			{
