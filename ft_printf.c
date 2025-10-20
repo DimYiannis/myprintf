@@ -6,22 +6,26 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 12:26:16 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 15:06:16 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "myheader.h"
 #include <stdarg.h>
 #include <stddef.h>
-#include "myheader.h"
 #include <stdint.h>
+#include <stdio.h>
 
 int	ft_printf(const char *type, ...)
 {
-	va_list args;
-	size_t count;
-	size_t i;
-	size_t len;
-	size_t j;
+	va_list			args;
+	size_t			count;
+	size_t			i;
+	size_t			len;
+	size_t			j;
+	unsigned int	n;
+	char			*tmp;
+	char			c;
 
 	count = 0;
 	i = 0;
@@ -43,12 +47,12 @@ int	ft_printf(const char *type, ...)
 					j++;
 				}
 				i++;
-                j = 0;
+				j = 0;
 			}
 			else if (type[i] == 'u')
 			{
-                unsigned int n = va_arg(args, unsigned int);
-                char *tmp = ft_unsigneditoa(n);
+				n = va_arg(args, unsigned int);
+				tmp = ft_unsigneditoa(n);
 				len = ft_strlen(tmp);
 				count += len;
 				while (j < len)
@@ -57,16 +61,17 @@ int	ft_printf(const char *type, ...)
 					j++;
 				}
 				i++;
-                j = 0;
+				j = 0;
 			}
 			else if (type[i] == 'x' || type[i] == 'X')
 			{
-                if (type[i] == 'x')
-                    ft_hexputnbr(va_arg(args, unsigned int), 0);
-                else
-                    ft_hexputnbr(va_arg(args, unsigned int), 1);
-                len = count_digits(va_arg(args, unsigned int));
-                count += len;
+				if (type[i] == 'x')
+					ft_hexputnbr(va_arg(args, unsigned int), 0);
+				else
+					ft_hexputnbr(va_arg(args, unsigned int), 1);
+				len = count_digits(va_arg(args, unsigned int));
+				count += len;
+				i++;
 			}
 			else if (type[i] == 's')
 			{
@@ -78,27 +83,28 @@ int	ft_printf(const char *type, ...)
 					j++;
 				}
 				i++;
-                j = 0;
+				j = 0;
 			}
 			else if (type[i] == 'c')
 			{
-                char c = (char)va_arg(args, int);
+				c = (char)va_arg(args, int);
 				write(1, &c, 1);
 				count++;
 				i++;
 			}
 			else if (type[i] == 'p')
 			{
-               ft_addressputnbr(va_arg(args, uintptr_t));
-				len = count_digits(va_arg(args, uintptr_t));
+				ft_addressputnbr(va_arg(args, uintptr_t));
+				len = address_len(va_arg(args, uintptr_t));
 				count += len;
+				i++;
 			}
 			else if (type[i] == '%')
 			{
-                char c = '%';
+				c = '%';
 				write(1, &c, 1);
 				count++;
-                i++;
+				i++;
 			}
 		}
 		write(1, &type[i], 1);
