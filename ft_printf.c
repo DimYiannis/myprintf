@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 17:05:25 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:27:58 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ int	ft_printf(const char *type, ...)
 			{
 				tmp = ft_itoa(va_arg(args, int));
 				len = ft_strlen(tmp);
-				count += len;
 				write(1, tmp, len);
-				i++;
+				free(tmp);
+				count += len;
 			}
 			else if (type[i] == 'u')
 			{
 				tmp = ft_unsigneditoa(va_arg(args, unsigned int));
 				len = ft_strlen(tmp);
-				count += len;
 				write(1, tmp, len);
-				i++;
+				count += len;
+				free(tmp);
 			}
 			else if (type[i] == 'x' || type[i] == 'X')
 			{
@@ -57,42 +57,39 @@ int	ft_printf(const char *type, ...)
 					ft_hexputnbr(n, 0);
 				else
 					ft_hexputnbr(n, 1);
-				len = count_digits(n);
-				count += len;
-				i++;
+				count += count_digits(n);
 			}
 			else if (type[i] == 's')
 			{
 				tmp = va_arg(args, char *);
+				if (!tmp)
+					tmp = "(null)";
 				len = ft_strlen(tmp);
-				count += len;
 				write(1, tmp, len);
-				i++;
+				count += len;
 			}
 			else if (type[i] == 'c')
 			{
 				char c = (char)va_arg(args, int);
 				write(1, &c, 1);
 				count++;
-				i++;
 			}
 			else if (type[i] == 'p')
 			{
 				ft_addressputnbr(va_arg(args, uintptr_t));
 				len = address_len(va_arg(args, uintptr_t));
 				count += len;
-				i++;
 			}
 			else if (type[i] == '%')
 			{
-				write(1, &type[i], 1);
+				write(1, "%", 1);
 				count++;
-				i++;
 			}
+			i++;
 		}
 		write(1, &type[i], 1);
-		i++;
 		count++;
+		i++;
 	}
 	va_end(args);
 	return (count);
