@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 16:17:53 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:32:25 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,11 @@ int	ft_printf(const char *type, ...)
 			i++;
 			if (type[i] == 'd' || type[i] == 'i')
 			{
-				len = ft_strlen(ft_itoa(va_arg(args, int)));
+				tmp = ft_itoa(va_arg(args, int));
+				len = ft_strlen(tmp);
 				count += len;
-				while (j < len)
-				{
-					write(1, &va_arg(args, char *)[j], 1);
-					j++;
-				}
+				write(1, tmp, len);
 				i++;
-				j = 0;
 			}
 			else if (type[i] == 'u')
 			{
