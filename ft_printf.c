@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 16:34:43 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:39:05 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@ int	ft_printf(const char *type, ...)
 	size_t			count;
 	size_t			i;
 	size_t			len;
-	size_t			j;
 	unsigned int	n;
 	char			*tmp;
-	char			c;
 
 	count = 0;
 	i = 0;
-	j = 0;
 	va_start(args, type);
 	len = 0;
 	while (type[i])
@@ -66,15 +63,11 @@ int	ft_printf(const char *type, ...)
 			}
 			else if (type[i] == 's')
 			{
-				len = ft_strlen(va_arg(args, char *));
+				tmp = va_arg(args, char *);
+				len = ft_strlen(tmp);
 				count += len;
-				while (j < len)
-				{
-					write(1, &va_arg(args, char *)[j], 1);
-					j++;
-				}
+				write(1, tmp, len);
 				i++;
-				j = 0;
 			}
 			else if (type[i] == 'c')
 			{
@@ -92,8 +85,7 @@ int	ft_printf(const char *type, ...)
 			}
 			else if (type[i] == '%')
 			{
-				c = '%';
-				write(1, &c, 1);
+				write(1, &type[i], 1);
 				count++;
 				i++;
 			}
