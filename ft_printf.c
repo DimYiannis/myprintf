@@ -6,13 +6,14 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 10:45:23 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 12:26:16 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stddef.h>
 #include "myheader.h"
+#include <stdint.h>
 
 int	ft_printf(const char *type, ...)
 {
@@ -88,12 +89,9 @@ int	ft_printf(const char *type, ...)
 			}
 			else if (type[i] == 'p')
 			{
-               const void *ptr = va_arg(args, void *);
-			   const char *s = ptr;
-				len = ft_strlen(s);
+               ft_addressputnbr(va_arg(args, uintptr_t));
+				len = count_digits(va_arg(args, uintptr_t));
 				count += len;
-				write(1, &s, len);
-				i++;
 			}
 			else if (type[i] == '%')
 			{
