@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 12:32:59 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 14:34:52 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,19 @@ void	ft_addressputnbr(uintptr_t n)
 		write(1, "0x", 2);
 		write(1, &digits[n % 16], 1);
 	}
+}
+
+uintptr_t	address_len(uintptr_t n)
+{
+	uintptr_t	count;
+
+	if (n == 0)
+		return (1);
+	count = 0;
+	while (n != 0)
+	{
+		n /= 10;
+		count++;
+	}
+	return (count);
 }
