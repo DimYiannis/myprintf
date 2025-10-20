@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 16:39:05 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 17:05:25 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_printf(const char *type, ...)
 			}
 			else if (type[i] == 'c')
 			{
-				c = (char)va_arg(args, int);
+				char c = (char)va_arg(args, int);
 				write(1, &c, 1);
 				count++;
 				i++;
