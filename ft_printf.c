@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 21:27:58 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 22:08:05 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,79 +16,121 @@
 #include <stdint.h>
 #include <stdio.h>
 
+static int int_case(va_list args)
+{
+	char * tmp;
+	int len;
+
+	tmp = ft_itoa(va_arg(args, int));
+	len = ft_strlen(tmp);
+	write(1, tmp, len);
+	free(tmp);
+	return (len);
+}
+
+static int unsigned_case(va_list args)
+{
+	char *tmp;
+	unsigned int n;
+	
+	tmp = ft_unsigneditoa(va_arg(args, unsigned int));
+	len = ft_strlen(tmp);
+	write(1, tmp, len);
+	free(tmp);
+	return (len);
+}
+
+static int hex_case(va_list args, char c)
+{
+	unsigned int n;
+	unsigned int len;
+	
+	n = va_arg(args, unsigned int);
+	if (c == 'x')
+		ft_hexputnbr(n, 0);
+	else
+		ft_hexputnbr(n, 1);
+	len = count_digits(n);
+	return (len);
+}
+
+static int rest_cases(va_list args, char c)
+{
+	char *tmp;
+	char ch;
+	uintptr_t ptr;
+	int len;
+
+	if (c == 's')
+	{
+		tmp = va_arg(args, char *);
+		if (!tmp)
+			tmp = "(null)";
+		len = ft_strlen(tmp);
+		write(1, tmp, len);
+		return (len);
+		}
+	else if (c == 'c')
+	{
+		ch = (char)va_arg(args, int);
+		write(1, &ch, 1);
+		return (1);
+	}
+	else if (c == 'p')
+	{
+		ptr = va_arg(args, uintptr_t);
+		ft_addressputnbr(ptr);
+		return ((int)address_len(ptr));
+	}
+	else if (c == '%')
+	{
+		write(1, "%", 1);
+		return (1);
+	}
+	return (0);
+}
+
 int	ft_printf(const char *type, ...)
 {
 	va_list			args;
 	size_t			count;
 	size_t			i;
-	size_t			len;
-	unsigned int	n;
-	char			*tmp;
 
 	count = 0;
 	i = 0;
 	va_start(args, type);
-	len = 0;
 	while (type[i])
 	{
-		if (type[i] == '%')
+		if (type[i] == '%' %% type[i + 1])
 		{
 			i++;
 			if (type[i] == 'd' || type[i] == 'i')
 			{
-				tmp = ft_itoa(va_arg(args, int));
-				len = ft_strlen(tmp);
-				write(1, tmp, len);
-				free(tmp);
+				len = int_case(args);
 				count += len;
 			}
 			else if (type[i] == 'u')
 			{
-				tmp = ft_unsigneditoa(va_arg(args, unsigned int));
-				len = ft_strlen(tmp);
-				write(1, tmp, len);
-				count += len;
-				free(tmp);
+				len = unsigned_case(args);
+				count += len;	
 			}
 			else if (type[i] == 'x' || type[i] == 'X')
 			{
-				n = va_arg(args, unsigned int);
-				if (type[i] == 'x')
-					ft_hexputnbr(n, 0);
-				else
-					ft_hexputnbr(n, 1);
-				count += count_digits(n);
-			}
-			else if (type[i] == 's')
-			{
-				tmp = va_arg(args, char *);
-				if (!tmp)
-					tmp = "(null)";
-				len = ft_strlen(tmp);
-				write(1, tmp, len);
+				len = hex_case(args, type[i]);
 				count += len;
 			}
-			else if (type[i] == 'c')
+			else 
 			{
-				char c = (char)va_arg(args, int);
-				write(1, &c, 1);
-				count++;
-			}
-			else if (type[i] == 'p')
-			{
-				ft_addressputnbr(va_arg(args, uintptr_t));
-				len = address_len(va_arg(args, uintptr_t));
+				len = rest_cases(args, type[i]);
 				count += len;
-			}
-			else if (type[i] == '%')
-			{
-				write(1, "%", 1);
-				count++;
 			}
 			i++;
 		}
-		write(1, &type[i], 1);
-		count++;
+		else
+		{
+			write(1, &type[i], 1);
+			count++;
+		}	
 		i++;
 	}
 	va_end(args);
