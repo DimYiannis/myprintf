@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 15:06:16 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:17:53 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,12 @@ int	ft_printf(const char *type, ...)
 			}
 			else if (type[i] == 'x' || type[i] == 'X')
 			{
+				n = va_arg(args, unsigned int);
 				if (type[i] == 'x')
-					ft_hexputnbr(va_arg(args, unsigned int), 0);
+					ft_hexputnbr(n, 0);
 				else
-					ft_hexputnbr(va_arg(args, unsigned int), 1);
-				len = count_digits(va_arg(args, unsigned int));
+					ft_hexputnbr(n, 1);
+				len = count_digits(n);
 				count += len;
 				i++;
 			}
