@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 22:11:16 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/20 22:27:21 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int int_case(va_list args)
 static int unsigned_case(va_list args)
 {
 	char *tmp;
-	unsigned int n;
+	int len;
 	
 	tmp = ft_unsigneditoa(va_arg(args, unsigned int));
 	len = ft_strlen(tmp);
@@ -101,7 +101,7 @@ int	ft_printf(const char *type, ...)
 	va_start(args, type);
 	while (type[i])
 	{
-		if (type[i] == '%' %% type[i + 1])
+		if (type[i] == '%' && type[i + 1])
 		{
 			i++;
 			if (type[i] == 'd' || type[i] == 'i')
