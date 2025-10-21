@@ -6,11 +6,11 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/21 10:04:47 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/21 14:46:04 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "myheader.h"
+#include "ft_printf.h"
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -39,30 +39,28 @@ static int	intandc_case(va_list args, char c)
 
 static int	unsignedandhex_case(va_list args, char c)
 {
-	char	*tmp;
-	int		len1;
+	char			*tmp;
+	int				len;
 	unsigned int	n;
-	unsigned int	len2;
 
-
-	if (type[i] == 'u')
+	len = 0;
+	if (c == 'u')
 	{
 		tmp = ft_unsigneditoa(va_arg(args, unsigned int));
-		len1 = ft_strlen(tmp);
+		len = ft_strlen(tmp);
 		write(1, tmp, len);
 		free(tmp);
-		return (len1);
 	}
-	else if (type[i] == 'x' || type[i] == 'X')
+	else if (c == 'x' || c == 'X')
 	{
 		n = va_arg(args, unsigned int);
 		if (c == 'x')
 			ft_hexputnbr(n, 0);
 		else
 			ft_hexputnbr(n, 1);
-		len2 = count_digits(n);
-		return (len2);
+		len = count_digits(n);
 	}
+	return (len);
 }
 
 static int	rest_cases(va_list args, char c)
