@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 16:43:44 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/21 15:12:14 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_unsigneditoa(unsigned int n)
 	return (s);
 }
 
-void	ft_hexputnbr(unsigned int n, int upper)
+void	ft_hexputnbr(unsigned long n, int upper)
 {
 	char	*digits;
 
@@ -58,12 +58,8 @@ void	ft_hexputnbr(unsigned int n, int upper)
 	if (!upper)
 		digits = "0123456789abcdef";
 	if (n >= 16)
-	{
-		ft_hexputnbr(n / 16, 1);
-		write(1, &digits[n % 16], 1);
-	}
-	else
-		write(1, &digits[n % 16], 1);
+		ft_hexputnbr(n / 16, upper);
+	write(1, &digits[n % 16], 1);
 }
 
 void	ft_addressputnbr(uintptr_t n)
@@ -71,16 +67,16 @@ void	ft_addressputnbr(uintptr_t n)
 	char	*digits;
 
 	digits = "0123456789abcdef";
+	if (n == 0)
+	{
+		write(1, "0x0", 3);
+		return ;
+	}		
 	if (n >= 16)
-	{
 		ft_addressputnbr(n / 16);
-		write(1, &digits[n % 16], 1);
-	}
-	else
-	{
+	if (n < 16)
 		write(1, "0x", 2);
-		write(1, &digits[n % 16], 1);
-	}
+	write(1, &digits[n % 16], 1);
 }
 
 uintptr_t	address_len(uintptr_t n)
