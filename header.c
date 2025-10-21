@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/21 21:46:33 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/21 22:21:54 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ft_addressputnbr(void *p)
 
 	addr = (uintptr_t)p;
 	if (!addr)
-		return (write(1, "0x0", 3));
+		return (write(1, "(nil)", 5));
 	write(1, "0x", 2);	
 	len = 	ft_hexputnbr(addr, 0);
 	return (len + 2);
