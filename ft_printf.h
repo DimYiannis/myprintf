@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myheader.h                                         :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:06:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/20 16:44:25 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/21 20:43:10 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 unsigned int	count_digits(unsigned int n);
 char			*ft_unsigneditoa(unsigned int n);
-void			ft_hexputnbr(unsigned int n, int upper);
-void			ft_addressputnbr(uintptr_t n);
+int             ft_hexputnbr(unsigned int n, int upper);
+int	            ft_addressputnbr(void *p);
 uintptr_t		address_len(uintptr_t n);
 int				ft_printf(const char *type, ...);
 
