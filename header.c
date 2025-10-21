@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/21 15:12:14 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:03:18 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_unsigneditoa(unsigned int n)
 	return (s);
 }
 
-void	ft_hexputnbr(unsigned long n, int upper)
+void	ft_hexputnbr(unsigned int n, int upper)
 {
 	char	*digits;
 
@@ -62,21 +62,25 @@ void	ft_hexputnbr(unsigned long n, int upper)
 	write(1, &digits[n % 16], 1);
 }
 
-void	ft_addressputnbr(uintptr_t n)
+void	ft_addressputnbr(void *p)
 {
-	char	*digits;
+	char		*digits;
+	uintptr_t	addr;
 
+	addr = (uintptr_t)p;
 	digits = "0123456789abcdef";
-	if (n == 0)
+	
+	if (addr == 0)
 	{
 		write(1, "0x0", 3);
 		return ;
 	}		
-	if (n >= 16)
-		ft_addressputnbr(n / 16);
-	if (n < 16)
+	if (addr >= 16)
+		ft_addressputnbr((void *)(addr / 16));
+	if (addr < 16)
 		write(1, "0x", 2);
-	write(1, &digits[n % 16], 1);
+	write(1, &digits[addr % 16], 1);
+	
 }
 
 uintptr_t	address_len(uintptr_t n)
@@ -91,5 +95,5 @@ uintptr_t	address_len(uintptr_t n)
 		n /= 10;
 		count++;
 	}
-	return (count);
+	return (count + 2);
 }

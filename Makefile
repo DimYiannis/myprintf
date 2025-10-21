@@ -8,7 +8,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 SRC =  ft_printf.c header.c
 OBJ = $(SRC:.c=.o)
 	
-%.o: %.c myheader.h
+%.o: %.c ft_printf.h
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 all: $(NAME)
