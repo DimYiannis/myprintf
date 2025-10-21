@@ -1,9 +1,9 @@
-#include <stdio.h>
 #include "myheader.h"
+#include <stdio.h>
 
-int main()
+int	main(void)
 {
-    unsigned int c = 0x12;
-    ft_printf("wanabee: %x\n", c);
-    printf("legit: %x\n", c);
+	unsigned int c = 0x12;
+	ft_printf("wanabee: %x\n", c);
+	printf("legit: %x\n", c);
 }
