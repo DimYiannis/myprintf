@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/21 20:45:14 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:44:27 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	intandc_case(va_list args, char c)
 	else
 	{
 		tmp = ft_itoa(va_arg(args, int));
+		if (!tmp)
+			return (0);
 		len = ft_strlen(tmp);
 		write(1, tmp, len);
 		free(tmp);
@@ -43,13 +45,13 @@ static int	unsignedandhex_case(va_list args, char c)
 	int				len;
 	unsigned int	n;
 
-	len = 0;
 	if (c == 'u')
 	{
 		tmp = ft_unsigneditoa(va_arg(args, unsigned int));
 		len = ft_strlen(tmp);
 		write(1, tmp, len);
 		free(tmp);
+		return (len);
 	}
 	else if (c == 'x' || c == 'X')
 	{
@@ -59,7 +61,7 @@ static int	unsignedandhex_case(va_list args, char c)
 		else
 			return (ft_hexputnbr(n, 1));
 	}
-	return (len);
+	return (0);
 }
 
 static int	rest_cases(va_list args, char c)
