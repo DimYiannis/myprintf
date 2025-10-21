@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/21 17:03:18 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:20:43 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ char	*ft_unsigneditoa(unsigned int n)
 {
 	char			*s;
 	unsigned int	len;
-	unsigned int	num;
 
-	num = n;
 	len = count_digits(n);
 	s = malloc(len + 1);
 	if (!s)
@@ -43,44 +41,40 @@ char	*ft_unsigneditoa(unsigned int n)
 	s[len] = '\0';
 	while (len-- > 0)
 	{
-		s[len] = num % 10 + '0';
-		num /= 10;
+		s[len] = n % 10 + '0';
+		n /= 10;
 	}
 	return (s);
 }
 
-void	ft_hexputnbr(unsigned int n, int upper)
+int	ft_hexputnbr(unsigned int n, int upper)
 {
 	char	*digits;
+	int len;
 
 	if (upper)
 		digits = "0123456789ABCDEF";
 	if (!upper)
 		digits = "0123456789abcdef";
+	len = 0;
 	if (n >= 16)
-		ft_hexputnbr(n / 16, upper);
+		len += ft_hexputnbr(n / 16, upper);
 	write(1, &digits[n % 16], 1);
+	return (len + 1);
 }
 
-void	ft_addressputnbr(void *p)
+int	ft_addressputnbr(void *p)
 {
-	char		*digits;
 	uintptr_t	addr;
+	int len;
 
 	addr = (uintptr_t)p;
-	digits = "0123456789abcdef";
 	
 	if (addr == 0)
-	{
-		write(1, "0x0", 3);
-		return ;
-	}		
-	if (addr >= 16)
-		ft_addressputnbr((void *)(addr / 16));
-	if (addr < 16)
-		write(1, "0x", 2);
-	write(1, &digits[addr % 16], 1);
-	
+		return (write(1, "0x0", 3));
+	write(1, "0x", 2);	
+	len = 	ft_hexputnbr(addr, 0);
+	return (len + 2);
 }
 
 uintptr_t	address_len(uintptr_t n)
