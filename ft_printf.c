@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/21 14:46:04 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:05:52 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ static int	unsignedandhex_case(va_list args, char c)
 
 static int	rest_cases(va_list args, char c)
 {
-	char		*tmp;
-	uintptr_t	ptr;
-	int			len;
+	char	*tmp;
+	void	*ptr;
+	int		len;
 
 	if (c == 's')
 	{
@@ -79,9 +79,9 @@ static int	rest_cases(va_list args, char c)
 	}
 	else if (c == 'p')
 	{
-		ptr = va_arg(args, uintptr_t);
+		ptr = va_arg(args, void *);
 		ft_addressputnbr(ptr);
-		return ((int)address_len(ptr));
+		return ((int)address_len(*(int *)ptr));
 	}
 	else if (c == '%')
 		return (write(1, "%", 1));
