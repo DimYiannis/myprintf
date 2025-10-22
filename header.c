@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 08:50:05 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/22 09:18:55 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_hexputnbr(unsigned long long n, int upper)
 
 int	ft_addressputnbr(void *p)
 {
-	unsigned long long	addr;
+	uintptr_t	addr;
 	int					len;
 
 	addr = (uintptr_t)p;
