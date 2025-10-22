@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/21 22:21:54 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/22 08:30:30 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_unsigneditoa(unsigned int n)
 int	ft_hexputnbr(unsigned long long n, int upper)
 {
 	char	*digits;
-	int len;
+	int		len;
 
 	len = 0;
 	if (upper)
@@ -66,13 +66,13 @@ int	ft_hexputnbr(unsigned long long n, int upper)
 int	ft_addressputnbr(void *p)
 {
 	unsigned long long	addr;
-	int len;
+	int					len;
 
 	addr = (uintptr_t)p;
 	if (!addr)
 		return (write(1, "(nil)", 5));
-	write(1, "0x", 2);	
-	len = 	ft_hexputnbr(addr, 0);
+	write(1, "0x", 2);
+	len = ft_hexputnbr(addr, 0);
 	return (len + 2);
 }
 
