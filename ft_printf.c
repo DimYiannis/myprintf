@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 16:29:20 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:41:06 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,14 @@ static int	check_convertion(va_list *args, const char *c)
 		if (c[1] == 'x' || c[1] == 'X')
 		{
 			n = va_arg(*args, unsigned int);
+			len = write(1, "0x", 2);
 			if (c == 'x')
 			{
-				len = write(1, "0x", 2);
 				len += ft_hexputnbr(n, 0);
 				return (len);
 			}
 			else
 			{
-				len = write(1, "0x", 2);
 				len += ft_hexputnbr(n, 1);
 				return (len);
 			}
@@ -41,11 +40,8 @@ static int	check_convertion(va_list *args, const char *c)
 	}
 	else if (c[0] == ' ' && (c[1] == 'd' || c[1] == 'i')) 
 			return (printing_int(' ', va_arg(*args, int)));
-	else if (c[0] == '+' && (c[1] == 'd' || c[1] == 'i'))
-	{
-			if (n > 0)
+	else if (c[0] == '+' && (c[1] == 'd' || c[1] == 'i') && n > 0)
 				return (printing_int('+', va_arg(*args, int)));
-	}
 	return (0);
 }
 
@@ -110,9 +106,7 @@ int	ft_printf(const char *type, ...)
 			i++;
 			if (type[i] == ' ' || type[i] == '+' || type[i] == '#')
 				check_convertion(&args, &type[i]);
-			if (type[i] == 'd' || type[i] == 'i' || type[i] == 'c')
-				count += intandc_case(&args, &type[i]);
-			else if (type[i] == 'u' || type[i] == 'x' || type[i] == 'X')
+			else if (type[i] == 'u')
 				count += unsignedandhex_case(&args, type[i]);
 			else
 				count += rest_cases(&args, type[i]);
