@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 14:23:56 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:49:01 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ static int	intandc_case(va_list *args, const char *c)
 			return (0);
 		len = ft_strlen(tmp);
 		check_convertion(c, num);
+		write(1, tmp, len);
 		free(tmp);
-		return (write(1, tmp, len));
+		return (len);
 	}
 	return (0);
 }
