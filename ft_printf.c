@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 16:11:13 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:29:20 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,13 @@
 #include <stdint.h>
 #include <stdio.h>
 
-static int	check_convertion(const void *type, const char *c)
+static int	check_convertion(va_list *args, const char *c)
 {
-	char	*ch;
-	char	*tmp;
 	int		len;
-	char	ch;
-	int		num;
 
-	ch = (char *)type;
-	if (ch[0] == '#')
+	if (c[0] == '#')
 	{
-		if (ch[1] == 'x' || ch[1] == 'X')
+		if (c[1] == 'x' || c[1] == 'X')
 		{
 			n = va_arg(*args, unsigned int);
 			if (c == 'x')
@@ -44,36 +39,12 @@ static int	check_convertion(const void *type, const char *c)
 			}
 		}
 	}
-	else if (ch[0] == ' ')
+	else if (c[0] == ' ' && (c[1] == 'd' || c[1] == 'i')) 
+			return (printing_int(' ', va_arg(*args, int)));
+	else if (c[0] == '+' && (c[1] == 'd' || c[1] == 'i'))
 	{
-		if (ch[1] == 'd' || ch[1] == 'i')
-		{
-			num = va_arg(*args, int);
-			tmp = ft_itoa(num);
-			if (!tmp)
-				return (0);
-			len = write(1, " ", 1);
-			len += write(1, tmp, ft_strlen(tmp));
-			free(tmp);
-			return (len);
-		}
-	}
-	else if (ch[0] == '+')
-	{
-		if (ch[1] == 'd' || ch[1] == 'i')
-		{
 			if (n > 0)
-			{
-				num = va_arg(*args, int);
-				tmp = ft_itoa(num);
-				if (!tmp)
-					return (0);
-				len = write(1, "+", 1);
-				len += write(1, tmp, ft_strlen(tmp));
-				free(tmp);
-				return (len);
-			}
-		}
+				return (printing_int('+', va_arg(*args, int)));
 	}
 	return (0);
 }
