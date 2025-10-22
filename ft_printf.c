@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 08:30:25 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:23:56 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,28 @@
 #include <stdint.h>
 #include <stdio.h>
 
-static int	intandc_case(va_list *args, char c)
+static int	intandc_case(va_list *args, const char *c)
 {
 	char	*tmp;
 	int		len;
 	char	ch;
 	int		num;
 
-	if (c == 'c')
+	if (*c == 'c')
 	{
 		ch = (char)va_arg(*args, int);
 		return (write(1, &ch, 1));
 	}
-	else
+	else if (*c == 'd' || *c == 'i')
 	{
 		num = va_arg(*args, int);
 		tmp = ft_itoa(num);
 		if (!tmp)
 			return (0);
 		len = ft_strlen(tmp);
-		write(1, tmp, len);
+		check_convertion(c, num);
 		free(tmp);
-		return (len);
+		return (write(1, tmp, len));
 	}
 	return (0);
 }
@@ -106,7 +106,7 @@ int	ft_printf(const char *type, ...)
 		{
 			i++;
 			if (type[i] == 'd' || type[i] == 'i' || type[i] == 'c')
-				count += intandc_case(&args, type[i]);
+				count += intandc_case(&args, &type[i]);
 			else if (type[i] == 'u' || type[i] == 'x' || type[i] == 'X')
 				count += unsignedandhex_case(&args, type[i]);
 			else
