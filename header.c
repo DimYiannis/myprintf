@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 09:18:55 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/22 09:57:12 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_hexputnbr(unsigned long long n, int upper)
 		digits = "0123456789ABCDEF";
 	if (!upper)
 		digits = "0123456789abcdef";
-	if (n >= 16)
+	if (n > 16)
 		len += ft_hexputnbr(n / 16, upper);
 	len += write(1, &digits[n % 16], 1);
 	return (len);
