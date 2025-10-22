@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 14:26:38 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:36:47 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,26 @@ int	ft_addressputnbr(void *p)
 
 void	check_convertion(const void *type, int n)
 {
-	if (*type == '#')
+	char *ch;
+
+	ch = (char *)type;
+	if (*ch == '#')
 	{
-		if (*(type++) == "x" || *(type++) == 'X')
+		if (*(ch++) == 'x' || *(ch++) == 'X')
 		{
-			return (write(1, "0x", 2));
+			write(1, "0x", 2);
 		}
 	}
-	else if (*type == ' ')
+	else if (*ch == ' ')
 	{
-		if (*(type++)== "d" || *(type++) == 'i')
+		if (*(ch++) == 'd' || *(ch++) == 'i')
 		{
-			return (write(1, " ", 1));
+			write(1, " ", 1);
 		}
 	}
-	else if (*type == '+')
+	else if (*ch == '+')
 	{
-		if (*(type++) == "d" || *(type++) == 'i')
+		if (*(ch++) == 'd' || *(ch++) == 'i')
 		{
 			if (n > 0)
 				write(1, "+", 1);
