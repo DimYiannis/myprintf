@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 14:49:01 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:11:13 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,72 @@
 #include <stdint.h>
 #include <stdio.h>
 
-static int	intandc_case(va_list *args, const char *c)
+static int	check_convertion(const void *type, const char *c)
 {
+	char	*ch;
 	char	*tmp;
 	int		len;
 	char	ch;
 	int		num;
 
-	if (*c == 'c')
+	ch = (char *)type;
+	if (ch[0] == '#')
 	{
-		ch = (char)va_arg(*args, int);
-		return (write(1, &ch, 1));
+		if (ch[1] == 'x' || ch[1] == 'X')
+		{
+			n = va_arg(*args, unsigned int);
+			if (c == 'x')
+			{
+				len = write(1, "0x", 2);
+				len += ft_hexputnbr(n, 0);
+				return (len);
+			}
+			else
+			{
+				len = write(1, "0x", 2);
+				len += ft_hexputnbr(n, 1);
+				return (len);
+			}
+		}
 	}
-	else if (*c == 'd' || *c == 'i')
+	else if (ch[0] == ' ')
 	{
-		num = va_arg(*args, int);
-		tmp = ft_itoa(num);
-		if (!tmp)
-			return (0);
-		len = ft_strlen(tmp);
-		check_convertion(c, num);
-		write(1, tmp, len);
-		free(tmp);
-		return (len);
+		if (ch[1] == 'd' || ch[1] == 'i')
+		{
+			num = va_arg(*args, int);
+			tmp = ft_itoa(num);
+			if (!tmp)
+				return (0);
+			len = write(1, " ", 1);
+			len += write(1, tmp, ft_strlen(tmp));
+			free(tmp);
+			return (len);
+		}
+	}
+	else if (ch[0] == '+')
+	{
+		if (ch[1] == 'd' || ch[1] == 'i')
+		{
+			if (n > 0)
+			{
+				num = va_arg(*args, int);
+				tmp = ft_itoa(num);
+				if (!tmp)
+					return (0);
+				len = write(1, "+", 1);
+				len += write(1, tmp, ft_strlen(tmp));
+				free(tmp);
+				return (len);
+			}
+		}
 	}
 	return (0);
 }
 
-static int	unsignedandhex_case(va_list *args, char c)
+static int	unsigned_case(va_list *args, char c)
 {
 	char			*tmp;
 	int				len;
-	unsigned int	n;
 
 	if (c == 'u')
 	{
@@ -57,14 +91,6 @@ static int	unsignedandhex_case(va_list *args, char c)
 		free(tmp);
 		return (len);
 	}
-	else if (c == 'x' || c == 'X')
-	{
-		n = va_arg(*args, unsigned int);
-		if (c == 'x')
-			return (ft_hexputnbr(n, 0));
-		else
-			return (ft_hexputnbr(n, 1));
-	}
 	return (0);
 }
 
@@ -73,14 +99,19 @@ static int	rest_cases(va_list *args, char c)
 	char	*tmp;
 	void	*ptr;
 	int		len;
+	char	ch;
 
-	if (c == 's')
+	if (*c == 'c')
+	{
+		ch = (char)va_arg(*args, int);
+		return (write(1, &ch, 1));
+	}
+	else if (c == 's')
 	{
 		tmp = va_arg(*args, char *);
 		if (!tmp)
 			tmp = "(null)";
-		len = ft_strlen(tmp);
-		return (write(1, tmp, len));
+		return (write(1, tmp, ft_strlen(tmp)));
 	}
 	else if (c == 'p')
 	{
@@ -106,6 +137,8 @@ int	ft_printf(const char *type, ...)
 		if (type[i] == '%' && type[i + 1])
 		{
 			i++;
+			if (type[i] == ' ' || type[i] == '+' || type[i] == '#')
+				check_convertion(&args, &type[i]);
 			if (type[i] == 'd' || type[i] == 'i' || type[i] == 'c')
 				count += intandc_case(&args, &type[i]);
 			else if (type[i] == 'u' || type[i] == 'x' || type[i] == 'X')
