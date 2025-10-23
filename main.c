@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:47:01 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/23 13:47:41 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/23 21:10:58 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,26 @@ void	test_ft_printf(void)
 	assert(ft_printf("%x %X\n", 15, 15) == printf("%x %X\n", 15, 15));
 	assert(ft_printf("%x %X\n", 16, 16) == printf("%x %X\n", 16, 16));
     assert(ft_printf("% d \n", 16) == printf("% d\n", 16));
-
+	assert(ft_printf("%+d \n", 16) == printf("%+d\n", 16));
+	assert(ft_printf("%#x \n", 16) == printf("%#x\n", 16));
 	printf("\n test passed \n");
 }
 
 int	main(void)
 {
-	unsigned int c = 0x101;
+	// unsigned int c = 0x101;
 	// char c = '%';
 	// unsigned int c = 200000;
 	// int c = 200;
 	// char s[] = "helooo";
 	// char *p = &c;
-    ft_printf("% d l\n", 16);
+	int n1 = ft_printf("Int: %d\n",42);
+	int n2 = printf("Int: %d\n",42);
+	printf("%d\n%d", n1, n2);
+    // ft_printf("% d l\n", 16);
 	// ft_printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX);
 	// printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX);
 	// assert(ft_printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX) == printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX));
 	// ft_printf("Hello %s!\n", "world");
-	// test_ft_printf();
+	test_ft_printf();
 }
