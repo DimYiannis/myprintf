@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/23 18:56:31 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/23 20:33:03 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	printing_int(char c, int num)
 	char	*tmp;
 
 	len = 0;
-	if (num >= 0)
+	if (num >= 0 && (c == ' ' || c == '+'))
 		len += write(1, &c, 1);
 	tmp = ft_itoa(num);
 	if (!tmp)
@@ -37,26 +37,47 @@ static int	check_convertion(va_list *args, const char *c)
 	int	len;
 	int	n;
 	unsigned int	u;
+	char flag;
 
-	len = 0;
-	if (*c == '#' && (*(c + 1) == 'x' || *(c + 1) == 'X'))
+	flag = 0;
+	if (*c == ' ' || *c == '+')
 	{
-		u = va_arg(*args, unsigned int);
-		if (*(c + 1) == 'x')
-		{
-			len = write(1, "0x", 2);
-			return (len + ft_hexputnbr(u, 0));
-		}	
-		else
-		{
-			len = write(1, "0x", 2);
-			return (len + ft_hexputnbr(u, 1));
-		}
+		flag = *c;
+		c++;
 	}
-	if ((*c == ' ' || *c == '+') && (*(c + 1) == 'd' || *(c + 1) == 'i'))
+	if (*c == '#')
+	{
+		flag = '#';
+		c++;
+	}	
+	len = 0;
+	if  (*c == 'd' || *c == 'i')
 	{
 		n = va_arg(*args, int);
-		return (printing_int(' ', n));
+		if (flag == '+' && n >= 0)
+			return (printing_int('+', n));
+		else if (flag == ' ' && n >= 0)
+			return (printing_int(' ', n));
+		return (printing_int(0, n));
+	}
+	if (*c == 'x' || *c == 'X')
+	{
+		u = va_arg(*args, unsigned int);
+		if (flag == '#' &&u != 0)
+		{
+			if (*c == 'x')
+			{
+				len += write(1, "0x", 2);
+				return (len + ft_hexputnbr(u, 0));
+			}
+				
+			else
+			{
+				len += write(1, "0X", 2);
+				return (len + ft_hexputnbr(u, 1));
+			}	
+		}	
+		return (len + ft_hexputnbr(u, (*c == 'X')));
 	}
 	return (0);
 }
@@ -119,18 +140,17 @@ int	ft_printf(const char *type, ...)
 		if (type[i] == '%' && type[i + 1])
 		{
 			i++;
-			if (type[i] == ' ' || type[i] == '+' || type[i] == '#')
-				{
+			while (type[i] == ' ')
+				i++;
+			if (type[i] == ' ' || type[i] == '+' || type[i] == '#' || type[i] == 'd' || type[i] == 'i'|| type[i] == 'x' || type[i] == 'X')
 					count += check_convertion(&args, &type[i]);
-					i++;
-				}
 			else if (type[i] == 'u')
 				count += unsigned_case(&args, type[i]);
 			else
 				count += rest_cases(&args, type[i]);
 		}
 		else
-			count += skip_char(&type[i]);
+			count += write(1, &type[i], 1);
 		i++;
 	}
 	va_end(args);
