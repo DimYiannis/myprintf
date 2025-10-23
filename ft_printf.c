@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 16:41:06 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/23 10:27:14 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,48 @@
 #include <stdint.h>
 #include <stdio.h>
 
-static int	check_convertion(va_list *args, const char *c)
+static int	printing_int(char c, int num)
 {
 	int		len;
+	char	*tmp;
 
+	tmp = ft_itoa(num);
+	if (!tmp)
+		return (0);
+	len = write(1, &c, 1);
+	len += write(1, tmp, ft_strlen(tmp));
+	free(tmp);
+	return (len);
+}
+
+static int	check_convertion(va_list *args, const char *c)
+{
+	int	len;
+	int	n;
+
+	n = va_arg(*args, unsigned int);
 	if (c[0] == '#')
 	{
 		if (c[1] == 'x' || c[1] == 'X')
 		{
-			n = va_arg(*args, unsigned int);
 			len = write(1, "0x", 2);
-			if (c == 'x')
-			{
-				len += ft_hexputnbr(n, 0);
-				return (len);
-			}
+			if (c[1] == 'x')
+				return (len + ft_hexputnbr(n, 0));
 			else
-			{
-				len += ft_hexputnbr(n, 1);
-				return (len);
-			}
+				return (len + ft_hexputnbr(n, 1));
 		}
 	}
-	else if (c[0] == ' ' && (c[1] == 'd' || c[1] == 'i')) 
-			return (printing_int(' ', va_arg(*args, int)));
+	else if (c[0] == ' ' && (c[1] == 'd' || c[1] == 'i'))
+		return (printing_int(' ', n));
 	else if (c[0] == '+' && (c[1] == 'd' || c[1] == 'i') && n > 0)
-				return (printing_int('+', va_arg(*args, int)));
+		return (printing_int('+', n));
 	return (0);
 }
 
 static int	unsigned_case(va_list *args, char c)
 {
-	char			*tmp;
-	int				len;
+	char	*tmp;
+	int		len;
 
 	if (c == 'u')
 	{
@@ -65,10 +74,9 @@ static int	rest_cases(va_list *args, char c)
 {
 	char	*tmp;
 	void	*ptr;
-	int		len;
 	char	ch;
 
-	if (*c == 'c')
+	if (c == 'c')
 	{
 		ch = (char)va_arg(*args, int);
 		return (write(1, &ch, 1));
@@ -105,14 +113,14 @@ int	ft_printf(const char *type, ...)
 		{
 			i++;
 			if (type[i] == ' ' || type[i] == '+' || type[i] == '#')
-				check_convertion(&args, &type[i]);
+				count += check_convertion(&args, &type[i]);
 			else if (type[i] == 'u')
-				count += unsignedandhex_case(&args, type[i]);
+				count += unsigned_case(&args, type[i]);
 			else
 				count += rest_cases(&args, type[i]);
 		}
 		else
-			count += write(1, &type[i], 1);
+			skip_char(&type[i]);
 		i++;
 	}
 	va_end(args);
