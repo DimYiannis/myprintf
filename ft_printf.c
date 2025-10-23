@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/23 10:49:31 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/23 13:06:46 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ static int	check_convertion(va_list *args, const char *c)
 {
 	int	len;
 	int	n;
+	int end_index;
 
+	end_index = len_conv(c);
 	n = va_arg(*args, unsigned int);
 	if (c[0] == '#')
 	{
-		if (c[1] == 'x' || c[1] == 'X')
+		if (c[end_index] == 'x' || c[end_index] == 'X')
 		{
 			len = write(1, "0x", 2);
 			if (c[1] == 'x')
@@ -47,9 +49,9 @@ static int	check_convertion(va_list *args, const char *c)
 				return (len + ft_hexputnbr(n, 1));
 		}
 	}
-	else if (c[0] == ' ' && (c[1] == 'd' || c[1] == 'i'))
+	else if (c[0] == ' ' && (c[end_index] == 'd' || c[end_index] == 'i'))
 		return (printing_int(' ', n));
-	else if (c[0] == '+' && (c[1] == 'd' || c[1] == 'i') && n > 0)
+	else if (c[0] == '+' && (c[end_index] == 'd' || c[end_index] == 'i') && n > 0)
 		return (printing_int('+', n));
 	return (0);
 }

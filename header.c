@@ -6,13 +6,14 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/23 10:51:00 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/23 13:47:19 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "ft_printf.h"
 
 unsigned int	count_digits(unsigned int n)
 {
@@ -76,31 +77,50 @@ int	ft_addressputnbr(void *p)
 	return (len + 2);
 }
 
-static int	skip_char(const char *c)
+int	skip_char(const char *c)
 {
 	const char	*first_arg;
 	int			i;
 	int			len;
 	int			count;
 
+	first_arg = c;
+	i = 0;
+	count = 0;
+	len = len_conv(first_arg);
+	if (ft_isalpha(first_arg[i]))
+	{
+		while (len-- > 0)
+			first_arg--;
+		if (*first_arg == '%')
+			i = len + 1;
+		else
+			count += write(1, &first_arg[i], 1);
+	}
+	else
+		count += write(1, &first_arg[i], 1);
+	return (count);
+}
+
+int len_conv( const char *c)
+{
+	const char	*first_arg;
+	int			i;
+	int			len;
+	
 	len = 0;
 	first_arg = c;
 	i = 0;
 	if (first_arg[i] == '%')
 	{
 		while (first_arg[i] && !ft_isalpha(first_arg[i]))
-		{
 			i++;
-			len++;
-		}
-		i -= len;
-		while (len > 0)
-		{
-			i++;
-			len--;
-		}
 	}
-	else
-		count = write(1, first_arg[i], 1);
-	return (count);
+	else if (first_arg[i] != '%')
+	{
+		while (first_arg[i] != '%')
+			i--;
+		i = -i;
+	}
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:47:01 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 15:14:31 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/23 13:47:41 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	main(void)
 	// int c = 200;
 	// char s[] = "helooo";
 	// char *p = &c;
-    ft_printf("% d \n", 16);
-	ft_printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX);
-	printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX);
-	assert(ft_printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX) == printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX));
-	ft_printf("Hello %s!\n", "world");
-	test_ft_printf();
+    ft_printf("% d l\n", 16);
+	// ft_printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX);
+	// printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX);
+	// assert(ft_printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX) == printf(":%p %p\n", (void *)LONG_MIN, (void *)LONG_MAX));
+	// ft_printf("Hello %s!\n", "world");
+	// test_ft_printf();
 }
