@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/23 10:27:14 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/23 10:49:31 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	ft_printf(const char *type, ...)
 				count += rest_cases(&args, type[i]);
 		}
 		else
-			skip_char(&type[i]);
+			count += skip_char(&type[i]);
 		i++;
 	}
 	va_end(args);
