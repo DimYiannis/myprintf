@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 16:22:12 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/23 10:28:49 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,31 @@ int	ft_addressputnbr(void *p)
 	return (len + 2);
 }
 
-int	printing_int(char c, int num)
+static const char  *skip_char(const char *c)
 {
-	int		len;
-	char	*tmp;
-	
-	num = va_arg(*args, int);
-	tmp = ft_itoa(num);
-	if (!tmp)
-		return (0);
-	len = write(1, &c, 1);
-	len += write(1, tmp, ft_strlen(tmp));
-	free(tmp);
-	return (len);
+	const char *first_arg;
+	int i;
+	int len;
+
+	len = 0;
+	first_arg = c;
+	i = 0;
+	if (first_arg[i] == '%')
+	{
+		while (!ft_isalpha(first_arg[i]))
+		{
+			i++;
+			len++;
+		}
+	}
+	i = 0;
+	if (len > 0 || (ft_isalpha(first_arg[i]) && first_arg[i]))
+	{
+		i++;
+		len--;
+	}
+	else
+		count += write(1, first_arg[i], 1);
+	return (first_arg);
 }
+
