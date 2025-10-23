@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:54:26 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/23 13:47:19 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:14:32 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int	skip_char(const char *c)
 	first_arg = c;
 	i = 0;
 	count = 0;
-	len = len_conv(first_arg);
 	if (ft_isalpha(first_arg[i]))
 	{
+		len = len_conv(first_arg);
 		while (len-- > 0)
 			first_arg--;
 		if (*first_arg == '%')
@@ -106,9 +106,11 @@ int len_conv( const char *c)
 {
 	const char	*first_arg;
 	int			i;
-	int			len;
+	const char	*index;
+	const char *ptr;
 	
-	len = 0;
+	ptr = c - 1;
+	index = NULL;
 	first_arg = c;
 	i = 0;
 	if (first_arg[i] == '%')
@@ -118,9 +120,15 @@ int len_conv( const char *c)
 	}
 	else if (first_arg[i] != '%')
 	{
-		while (first_arg[i] != '%')
-			i--;
-		i = -i;
+		while (*ptr != '%' && ptr <= first_arg)
+		{
+			if (ft_isalpha(*ptr))
+				index = ptr;
+			ptr--;
+		}
+		if (index && index < c)
+				return (0);
+		i = c - ptr;
 	}
 	return (i);
 }
