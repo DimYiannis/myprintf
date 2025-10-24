@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:17:48 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 14:12:04 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 15:17:32 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,9 @@ typedef struct s_print
     int is_zero;
     int perc:
     int sp;
+    int hash;
 }   t_print;
 
-unsigned int	count_digits(unsigned int n);
-char			*ft_unsigneditoa(unsigned int n);
-int				ft_hexputnbr(unsigned int n, int upper);
-int				ft_addressputnbr(void *p);
-uintptr_t		address_len(uintptr_t n);
-int				ft_printf(const char *type, ...);
 int				char_case(char c);
 int				string_case(va_list *args, char c);
 int				pointer_case(va_list *args, char c);
