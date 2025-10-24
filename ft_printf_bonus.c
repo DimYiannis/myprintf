@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 15:20:48 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:07:52 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_print	*tab_initialise(t_print tab)
 {
 	tab->width = 0;
-	tab->percision = 0;
+	tab->precision = 0;
 	tab->zero = 0;
 	tab->pnt = 0;
 	tab->dash = 0;
