@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 22:07:58 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 23:05:51 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ unsigned long	decide_conv(char *c, t_print *tab)
 	else if (*c == 'u')
 		i += unsigned_case(tab, *c);
 	else if (*c == '%')
-		i += write(1, "%", 1);
+		i += percent_case(tab, *c);
 	return (i);
 }
 
@@ -102,7 +102,7 @@ int	check_form(t_print *struct, char c)
 		tab->hash = 1;
 		i++;
 	}
-	if (ft_isdigit(c))
+	if (ft_isdigit(c) && c != '0')
 	{
 		tab->width = c;
 		i++;
