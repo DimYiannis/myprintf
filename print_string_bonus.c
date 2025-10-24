@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:49 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 22:07:29 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 22:30:50 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ int	string_case(t_print *tab)
 	if (tab->dash && tab->width)
 	{
 		write(1, s, len);
-		len += write(1, " ", tab->width);
+		len += write(1, " ", tab->width - len);
 	}
 	else if (tab->width)
 	{
-		len += write(1, " ", tab->width);
-		write(1, s, len - tab->width);
+		if (len < width)
+		{
+			len += write(1, " ", tab->width);
+			len += write(1, s, len - tab->width);
+		}
+		else
+			write(1, s, len);
 	}
 	if (tab->precision)
 		len += write(1, s, tab->precision);
