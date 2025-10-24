@@ -6,32 +6,32 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 12:16:33 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 13:56:14 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	t_print *tab_initialise(t_print tab)
+static t_print	*tab_initialise(t_print tab)
 {
-    tab->width;
-    tab->percision;
-    tab->zero;
-    tab->pnt;
-    tab->dash;
-    tab->total_length;
-    tab->sign;
-    tab->is_zero;
-    tab->perc:
-    tb->sp;
+	tab->width;
+	tab->percision;
+	tab->zero;
+	tab->pnt;
+	tab->dash;
+	tab->total_length;
+	tab->sign;
+	tab->is_zero;
+	tab->perc;
+	tb->sp;
 	return (tab);
 }
 int	ft_printf_bonus(const char *type, ...)
 {
-	t_print *tab;
-	int count;
-	int i;
-	
+	t_print	*tab;
+	int		count;
+	int		i;
+
 	tab = malloc(sizeof(t_print));
 	if (!tab)
 		return (-1);
@@ -42,26 +42,12 @@ int	ft_printf_bonus(const char *type, ...)
 	while (type[i])
 	{
 		if (type[i] == '%' && type[i + 1])
-		{
-			eval_format(type[i], tab);
-			i++;
-			while (type[i] == ' ')
-				i++;
-			if (type[i] == ' ' || type[i] == '+' || type[i] == '#' || type[i] == 'd' || type[i] == 'i'|| type[i] == 'x' || type[i] == 'X')
-					{
-						count += check_convertion(&args, &type[i], &tranversed);
-						i += tranversed;
-						break;
-					}
-			else if (type[i] == 'u')
-				count += unsigned_case(&args, type[i]);
-			else
-				count += rest_cases(&args, type[i]);
-		}
+			i = eval_format(type[i], tab);
 		else
-			count += write(1, &type[i], 1);
-		i++;
+			count += write(&type[i], 1);
 	}
-	va_end(args);
+	va_end(tab->args);
+	count += tab->total_length;
+	free(tab);
 	return (count);
 }
