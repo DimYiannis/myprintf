@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 20:23:47 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:32:02 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ unsigned int	eval_format(char *c, t_print *tab)
 			tab->zero = 1;
 			i++;
 		}
-		decide_conv(tab, c[i]);
+		i += decide_conv(tab, c[i]);
 	}
 	return (i);
 }

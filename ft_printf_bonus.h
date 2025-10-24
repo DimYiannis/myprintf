@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:17:48 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 15:17:32 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:08:24 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_print
 {
     va_list args;
     int width;
-    int percision;
+    int precision;
     int zero;
     int pnt;
     int dash;
