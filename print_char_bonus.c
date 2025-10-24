@@ -6,13 +6,13 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:55:33 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 20:37:48 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:39:17 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	char_case(va_list *args, char c)
+static int	char_case(t_print *tab, char c)
 {
 	char	*tmp;
 	void	*ptr;
