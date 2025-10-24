@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 13:56:14 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 15:20:48 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 static t_print	*tab_initialise(t_print tab)
 {
-	tab->width;
-	tab->percision;
-	tab->zero;
-	tab->pnt;
-	tab->dash;
-	tab->total_length;
-	tab->sign;
-	tab->is_zero;
-	tab->perc;
-	tb->sp;
+	tab->width = 0;
+	tab->percision = 0;
+	tab->zero = 0;
+	tab->pnt = 0;
+	tab->dash = 0;
+	tab->total_length = 0;
+	tab->sign = 0;
+	tab->is_zero = 0;
+	tab->perc = 0;
+	tab->sp = 0;
+	tab->hash = 0;
 	return (tab);
 }
 int	ft_printf_bonus(const char *type, ...)
