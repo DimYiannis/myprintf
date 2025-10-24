@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 20:32:02 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 22:07:58 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,17 @@ unsigned long	decide_conv(char *c, t_print *tab)
 
 	count == 0;
 	if (*c == 'd' || *c == 'i')
-		i += int_case(args, *c);
+		i += int_case(tab, *c);
 	else if (*c == 'c')
-		i += char_case(args, *c) else if (*c == 's') i += string_case(args, *c);
+		i += char_case(tab, *c) 
+	else if (*c == 's')
+		i += string_case(tab, *c);
 	else if (*c == 'x' || *c == 'X')
-		i += hex_case(args, *c);
+		i += hex_case(tab, *c);
 	else if (*c == 'p')
-		i += pointer_case(va_list * args, char c);
+		i += pointer_case(tab, c);
 	else if (*c == 'u')
-		i += unsigned_case(va_list * args, char c);
+		i += unsigned_case(tab, *c);
 	else if (*c == '%')
 		i += write(1, "%", 1);
 	return (i);
