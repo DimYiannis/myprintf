@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 15:30:19 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:23:47 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ unsigned int	eval_format(char *c, t_print *tab)
 	i = 0;
 	while (!ft_isalpha(c[i]))
 	{
-		if (c[i] == '.')
-		{
-			tab->pnt = 1;
-			i++;
-		}
+		i += check_width_precision(tab, c);
 		if (c[i] == '-')
 		{
 			tab->dash = 1;
@@ -34,7 +30,7 @@ unsigned int	eval_format(char *c, t_print *tab)
 			tab->zero = 1;
 			i++;
 		}
-		check_form(tab, c[i]);
+		decide_conv(tab, c[i]);
 	}
 	return (i);
 }
@@ -59,8 +55,32 @@ unsigned long	decide_conv(char *c, t_print *tab)
 	return (i);
 }
 
-unsigned int	check_comb(t_print *struct, char *c)
+int	check_width_precision(t_print *tab, char *c)
 {
+	int i;
+	int n;
+
+	i = 0;
+	n = 0;
+	while (ft_isdigit(c[i]))
+	{
+		n = n * 10 + c[i];
+		tab->width = n;
+		i++;
+	}
+	n = 0;
+	if (c[i] == '.')
+		{
+			tab->pnt = 1;
+			i++;
+			while (ft_isdigit(c[i]))
+			{
+				n = n * 10 + c[i];
+				tab->precision = n;
+				i++;
+			}
+		}
+	return (i);
 }
 
 int	check_form(t_print *struct, char c)
@@ -78,6 +98,11 @@ int	check_form(t_print *struct, char c)
 	if (c == '#')
 	{
 		tab->hash = 1;
+		i++;
+	}
+	if (ft_isdigit(c))
+	{
+		tab->width = c;
 		i++;
 	}
 	return i;
