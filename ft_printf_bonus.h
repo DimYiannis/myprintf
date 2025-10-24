@@ -6,17 +6,32 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:17:48 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 11:21:19 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/24 11:36:16 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 # include "libft/libft.h"
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+typedef struct s_print
+{
+    va_list args;
+    int width;
+    int percision;
+    int zero;
+    int pnt;
+    int dash;
+    int total_length;
+    int sign;
+    int is_zero;
+    int perc:
+    int sp;
+}   t_print;
 
 unsigned int	count_digits(unsigned int n);
 char			*ft_unsigneditoa(unsigned int n);
