@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:14:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 17:48:20 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:23:07 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	width_prec(char *tmp, int len)
 		else
 			len += putnchar(tmp, len);
 	}
+	return (len);
 }
 
 int	dash_width_prec(char *tmp, int len)
@@ -64,9 +65,10 @@ int	dash_width_prec(char *tmp, int len)
 					len += putnchar(tmp, len);
 			}
 			else
-				putnchar(s, len);
+				len = putnchar(s, len);
 		}
 	}
+	return (len);
 }
 
 int	prec(char *tmp, int len)
@@ -82,6 +84,7 @@ int	prec(char *tmp, int len)
 		else
 			len += putnchar(tmp, len);
 	}
+	return (len);
 }
 
 int	width_zero(char *tmp, int len)
@@ -94,8 +97,9 @@ int	width_zero(char *tmp, int len)
 			len += putnchar(tmp, len);
 		}
 		else
-			putnchar(tmp, len);
+			len = putnchar(tmp, len);
 	}
+	return (len);
 }
 int	dash_prec(char *tmp, int len)
 {
@@ -112,6 +116,7 @@ int	dash_prec(char *tmp, int len)
 				len += putnchar(tmp, len);
 		}
 		else
-			putnchar(tmp, len);
+			len = putnchar(tmp, len);
 	}
+	return (len);
 }
