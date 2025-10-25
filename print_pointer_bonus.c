@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 12:11:36 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 23:41:33 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,50 @@ static int	ft_ptrputnbr(unsigned long n)
 
 	len = 0;
 	digits = "0123456789ABCDEF";
-
 	if (n >= 16)
-		len += ft_ptrputnbr(n / 16, upper);
+		len += ft_ptrputnbr(n / 16);
 	len += write(1, &digits[n % 16], 1);
 	return (len);
 }
 
-int	pointer_case(va_list *args, char c)
+static int	count_digits(uintptr_t n)
+{
+	int count;
+	
+	count = 1;
+    while (n >= 16)
+    {
+        n /= 16;
+        count++;
+    }
+    return (count);
+}
+
+int	pointer_case(t_print *tab)
 {
 	void *ptr;
-	char *digits;
 	int len;
 	uintptr_t addr;
-
-	if (c == 'p')
+	int padding;
+	
+	ptr = va_arg(tab->args, void *);
+	addr = (uintptr_t)ptr;
+	padding = 0;
+	if (!addr)
+			return (write(1, "(nil)", 5));
+	len = 2 + count_digits(addr);
+	if (len < tab->width)
+		padding = tab->width - len;
+	if (tab->dash)
 	{
-		ptr = va_arg(*args, void *);
-		int ft_addressputnbr(void *p)
-		{
-			addr = (uintptr_t)p;
-			if (!addr)
-				return (write(1, "(nil)", 5));
-			write(1, "0x", 2);
-			len = ft_ptrputnbr(addr, 0);
-			return (len + 2);
-		}
+		len = write(1, "0x", 2);
+		len += ft_ptrputnbr(addr);
+		return (len + putnchar(' ', padding));
+	}
+	else
+	{
+		len =putnchar(' ', padding);
+		len += write(1, "0x", 2);
+		return (len + ft_ptrputnbr(addr));
 	}
 }
