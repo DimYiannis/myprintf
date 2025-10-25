@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 23:05:51 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 16:33:29 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	check_width_precision(t_print *tab, char *c)
 	return (i);
 }
 
-int	check_form(t_print *struct, char c)
+int	check_form(t_print *tab, char c)
 {
 	if (c == ' ')
 	{
