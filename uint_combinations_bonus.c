@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   combinations_bonus.c                               :+:      :+:    :+:   */
+/*   uint_combinations_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:14:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 15:28:43 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:48:20 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@ int	width_prec(char *tmp, int len)
 		{
 			if (tab->precision)
 			{
-				len = write(1, " ", tab->width - tab->precision);
+				len = putnchar(' ', tab->width - tab->precision);
 				if (len < tab->precision)
 				{
-					len += write(1, "0", tab->precision - len);
-					len += write(1, tmp, len);
+					len += putnchar('0', tab->precision - len);
+					len += putnchar(tmp, len);
 				}
 				else
-					len += write(1, tmp, len);
+					len += putnchar(tmp, len);
 			}
 			else
 			{
-				len = write(1, " ", tab->width - len);
-				len += write(1, tmp, len);
+				len = putnchar(' ', tab->width - len);
+				len += putnchar(tmp, len);
 			}
 		}
 		else
-			len = write(1, &tmp, len);
+			len += putnchar(tmp, len);
 	}
 }
 
@@ -48,23 +48,23 @@ int	dash_width_prec(char *tmp, int len)
 		{
 			if (len < tab->width)
 			{
-				write(1, s, len);
-				len += write(1, " ", tab->width - len);
+				putnchar(s, len);
+				len += putnchar(' ', tab->width - len);
 			}
 			else if (tab->precision)
 			{
 				if (len < tab->precision)
 				{
-					len += write(1, "0", tab->precision - len);
-					len += write(1, tmp, len);
+					len += putnchar('0', tab->precision - len);
+					len += putnchar(tmp, len);
 					if (width > tab->precision)
-						len += write(1, " ", width - tab->precision);
+						len += putnchar(' ', width - tab->precision);
 				}
 				else
-					len += write(1, tmp, len);
+					len += putnchar(tmp, len);
 			}
 			else
-				write(1, s, len);
+				putnchar(s, len);
 		}
 	}
 }
@@ -73,14 +73,14 @@ int	prec(char *tmp, int len)
 {
 	if (tab->precision)
 	{
-		len = write(1, "0", tab->width - tab->precision);
+		len = putnchar('0', tab->width - tab->precision);
 		if (len < tab->precision)
 		{
-			len += write(1, "0", tab->precision - len);
-			len += write(1, tmp, len);
+			len += putnchar('0', tab->precision - len);
+			len += putnchar(tmp, len);
 		}
 		else
-			len += write(1, tmp, len);
+			len += putnchar(tmp, len);
 	}
 }
 
@@ -90,11 +90,11 @@ int	width_zero(char *tmp, int len)
 	{
 		if (len < tb->width)
 		{
-			len = write(1, "0", tab->width - len);
-			len += write(1, tmp, len);
+			len = putnchar('0', tab->width - len);
+			len += putnchar(tmp, len);
 		}
 		else
-			write(1, tmp, len);
+			putnchar(tmp, len);
 	}
 }
 int	dash_prec(char *tmp, int len)
@@ -105,13 +105,13 @@ int	dash_prec(char *tmp, int len)
 		{
 			if (len < tab->precision)
 			{
-				len += write(1, "0", tab->precision - len);
-				len += write(1, tmp, len);
+				len += putnchar('0', tab->precision - len);
+				len += putnchar(tmp, len);
 			}
 			else
-				len += write(1, tmp, len);
+				len += putnchar(tmp, len);
 		}
 		else
-			write(1, s, len);
+			putnchar(tmp, len);
 	}
 }
