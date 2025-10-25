@@ -6,20 +6,20 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:52 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 15:33:31 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 16:35:54 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	unsigned_case(va_list *args, char c)
+int	unsigned_case(t_print *tab, char c)
 {
 	char	*tmp;
 	int		len;
 
 	if (c == 'u')
 	{
-		tmp = ft_unsigneditoa(va_arg(*args, unsigned int));
+		tmp = ft_unsigneditoa(va_arg(tab->args, unsigned int));
 		len = ft_strlen(tmp);
 		if (tab->width)
 			len = width_prec(tmp, len);
