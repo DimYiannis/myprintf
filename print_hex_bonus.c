@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:41 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 18:50:25 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 22:48:48 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,12 @@ unsigned long	hex_case(t_print *tab, const char *c)
 			len = hex_dash_width_prec(u, *c, tab);
 		else if (tab->zero)
 			len = hex_width_zero(u, *c, tab);
-		else if (tab->precision )
+		else if (tab->precision)
+			len = hex_precision(u, *c, tab);
+		else if (tab->precision && tab->width)
+			len = hex_width_prec(u, *c, tab);
+		else if (tab->dash && tab->prec && tab->width)
+			len = hash_dash_width_prec(u, *c, tab);
 	}
 	return (len);
 }
