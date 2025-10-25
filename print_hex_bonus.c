@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:41 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 16:30:08 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:34:44 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,55 @@ unsigned long	ft_hexputnbr(unsigned long n, int upper)
 	return (len);
 }
 
-unsigned long	hex_case(args, const char *c)
+unsigned int	hashflag(unsigned int n, char c, t_print *tab)
+{
+	unsigned int	len;
+
+	len = 0;
+	if (tab->hash && n != 0)
+	{
+		if (c == 'x')
+		{
+			len += write(1, "0x", 2);
+			return (len + ft_hexputnbr(n, 0));
+		}
+		else
+		{
+			len += write(1, "0X", 2);
+			return (len + ft_hexputnbr(n, 1));
+		}
+	}
+}
+
+unsigned int	no_hashflag(unsigned int n, char c, t_print *tab)
+{
+	if (tab->hash && n != 0)
+	{
+		if (c == 'x')
+			return (ft_hexputnbr(n, 0));
+		else
+			return (ft_hexputnbr(n, 1));
+	}
+}
+
+unsigned long	hex_case(t_print *tab, const char *c)
 {
 	unsigned long	len;
 
 	len = 0;
 	if (*c == 'x' || *c == 'X')
 	{
-		u = va_arg(*args, unsigned int);
+		u = va_arg(tabs->args, unsigned int);
 		if (tab->hash && u != 0)
-			hashflag(u, *c);
+			len = hashflag(u, *c, tab);
 		else if (tab->width && tab->hash)
-			hex_hash_width(u, *c)
+			len = hex_hash_width(u, *c, tab);
+		else if (tab->width)
+			len = hex_width(u, *c, tab);
+		else if (tab->dash)
+			len = hex_dash_width_prec(u, *c, tab);
+		else if ()
+			
 	}
 	return (len);
 }
