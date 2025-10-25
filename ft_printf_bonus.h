@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:17:48 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 17:34:06 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:31:59 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,8 @@ int				hex_hash_width(unsigned int n, char c);
 int				hex_width(unsigned int n, char c);
 unsigned int	hashflag(unsigned int n, char c);
 unsigned int	putnchar(char c, unsigned int n);
+int				hex_dash_width_prec(unsigned int n, char c, t_print *tab);
+int				hex_width_zero(char *tmp, int len);
+unsigned int	no_hashflag(unsigned int n, char c, t_print *tab);
 
 #endif

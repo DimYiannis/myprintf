@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:41 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 18:34:44 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:50:25 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,13 @@ unsigned long	hex_case(t_print *tab, const char *c)
 		u = va_arg(tabs->args, unsigned int);
 		if (tab->hash && u != 0)
 			len = hashflag(u, *c, tab);
-		else if (tab->width && tab->hash)
+		else if ((tab->width && tab->hash) || tab->width)
 			len = hex_hash_width(u, *c, tab);
-		else if (tab->width)
-			len = hex_width(u, *c, tab);
 		else if (tab->dash)
 			len = hex_dash_width_prec(u, *c, tab);
-		else if ()
-			
+		else if (tab->zero)
+			len = hex_width_zero(u, *c, tab);
+		else if (tab->precision )
 	}
 	return (len);
 }
