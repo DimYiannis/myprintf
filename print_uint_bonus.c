@@ -6,13 +6,13 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:52 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 15:30:32 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:33:31 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	unsigned_case(va_list *args, char c)
+int	unsigned_case(va_list *args, char c)
 {
 	char	*tmp;
 	int		len;
@@ -30,8 +30,7 @@ static int	unsigned_case(va_list *args, char c)
 		else if (tab->dash && tab->precision)
 			len += dash_prec(tmp, len);
 		write(1, tmp, len);
-		free(tmp);
-		return (len);
+		free(tmp);	
 	}
-	return (0);
+	return (len);
 }
