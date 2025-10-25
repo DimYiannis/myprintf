@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/24 20:07:52 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:33:53 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,11 @@ int	ft_printf_bonus(const char *type, ...)
 	count += tab->total_length;
 	free(tab);
 	return (count);
+}
+
+unsigned int	putnchar(char c, unsigned int n)
+{
+	while (n-- > 0)
+		write(1, &c, 1);
+	return (n);
 }
