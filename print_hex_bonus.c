@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:41 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 22:48:48 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 00:07:36 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ unsigned long	ft_hexputnbr(unsigned long n, int upper)
 		len += ft_hexputnbr(n / 16, upper);
 	len += write(1, &digits[n % 16], 1);
 	return (len);
+}
+
+int hex_len(unsigned int n)
+{
+	int len = 1;
+	while (n >= 16)
+	{
+		n /= 16;
+		len++;
+	}
+	return len;
 }
 
 unsigned int	hashflag(unsigned int n, char c, t_print *tab)
@@ -66,7 +77,7 @@ unsigned long	hex_case(t_print *tab, const char *c)
 	len = 0;
 	if (*c == 'x' || *c == 'X')
 	{
-		u = va_arg(tabs->args, unsigned int);
+		u = va_arg(tab->args, unsigned int);
 		if (tab->hash && u != 0)
 			len = hashflag(u, *c, tab);
 		else if ((tab->width && tab->hash) || tab->width)
