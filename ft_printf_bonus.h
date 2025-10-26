@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:17:48 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 16:29:35 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 16:54:31 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				pointer_case(t_print *tab);
 unsigned long	hex_case(t_print *tab, const char *c);
 int				int_case(t_print *tab, char c);
 int				unsigned_case(t_print *tab);
-int	percent_case(t_print *tab, char c);
+int				percent_case(t_print *tab, char c);
 int				ft_printf_bonus(const char *type, ...);
 unsigned int	eval_format(const char *c, t_print *tab);
 int				width_zero(t_print *tab, char *tmp, int len);
