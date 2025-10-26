@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:17:48 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 00:07:51 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 16:29:35 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,31 @@ typedef struct s_print
 	int			hash;
 }				t_print;
 
-int				char_case(char c);
-int				string_case(va_list *args, char c);
-int				pointer_case(va_list *args, char c);
-int				hex_case(va_list *args, const char *c);
-int				int_case(va_list *args, char c);
-static int		unsigned_case(va_list *args, char c);
+int				char_case(t_print *tab, char c);
+int				string_case(t_print *tab);
+int				pointer_case(t_print *tab);
+unsigned long	hex_case(t_print *tab, const char *c);
+int				int_case(t_print *tab, char c);
+int				unsigned_case(t_print *tab);
+int	percent_case(t_print *tab, char c);
 int				ft_printf_bonus(const char *type, ...);
-int				width_zero(char *tmp, int len);
-int				prec(char *tmp, int len);
-int				dash_width_prec(char *tmp, int len);
-int				width_prec(char *tmp, int len);
-int				dash_prec(char *tmp, int len);
-int				hex_hash_width(unsigned int n, char c);
-int				hex_width(unsigned int n, char c);
-unsigned int	hashflag(unsigned int n, char c);
+unsigned int	eval_format(const char *c, t_print *tab);
+int				width_zero(t_print *tab, char *tmp, int len);
+int				prec(t_print *tab, char *tmp, int len);
+int				dash_prec(t_print *tab, char *tmp, int len);
+int				width_prec(t_print *tab, char *tmp, int len);
+int				dash_prec(t_print *tab, char *tmp, int len);
+int				hex_hash_width(t_print *tab, unsigned int n, char c);
+unsigned int	hashflag(t_print *tab, unsigned int n, char c);
 unsigned int	putnchar(char c, unsigned int n);
-int				hex_dash_width_prec(unsigned int n, char c, t_print *tab);
-int				hex_width_zero(char *tmp, int len);
-unsigned int	no_hashflag(unsigned int n, char c, t_print *tab);
-int	hash_dash_width_prec(unsigned int n, char c, t_print *tab);
-int	hex_width_prec(char *tmp, int len);
-int hex_precision(char *tmp, int len, char c)
-int hex_len(unsigned int n);
+int				hex_dash_width_prec(t_print *tab, unsigned int n, char c);
+int				hex_width_zero(t_print *tab, unsigned int n, char c);
+unsigned int	no_hashflag(t_print *tab, unsigned int n, char c);
+int				hash_dash_width_prec(t_print *tab, unsigned int n, char c);
+int				hex_width_prec(t_print *tab, unsigned int n, const char c);
+int				hex_precision(t_print *tab, unsigned int n, char c);
+int				hex_len(unsigned int n);
+int				count_digits(uintptr_t n);
+int				dash_width_prec(t_print *tab, char *tmp, int len);
 
 #endif

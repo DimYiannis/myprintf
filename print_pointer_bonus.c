@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 13:24:19 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:37:30 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_ptrputnbr(unsigned long n)
 	return (len);
 }
 
-static int	count_digits(uintptr_t n)
+int	count_digits(uintptr_t n)
 {
 	int count;
 	

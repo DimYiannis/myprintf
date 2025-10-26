@@ -6,13 +6,13 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 17:33:53 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:50:54 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-static t_print	*tab_initialise(t_print tab)
+static t_print	*tab_initialise(t_print *tab)
 {
 	tab->width = 0;
 	tab->precision = 0;
@@ -43,9 +43,9 @@ int	ft_printf_bonus(const char *type, ...)
 	while (type[i])
 	{
 		if (type[i] == '%' && type[i + 1])
-			i = eval_format(type[i], tab);
+			i = eval_format(&type[i + 1], tab);
 		else
-			count += write(&type[i], 1);
+			count += write(1, &type[i], 1);
 	}
 	va_end(tab->args);
 	count += tab->total_length;
@@ -55,7 +55,10 @@ int	ft_printf_bonus(const char *type, ...)
 
 unsigned int	putnchar(char c, unsigned int n)
 {
+	unsigned int	count;
+
+	count = n;
 	while (n-- > 0)
 		write(1, &c, 1);
-	return (n);
+	return (count);
 }
