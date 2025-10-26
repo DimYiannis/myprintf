@@ -6,11 +6,11 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:55:33 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/25 23:48:02 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 13:26:11 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 int	char_case(t_print *tab, char c)
 {
@@ -29,7 +29,7 @@ int	char_case(t_print *tab, char c)
 		putnchar(' ', padding);
 		write(1, &c, 1);
 	}
-	if (tab->witdh > 1)
+	if (tab->width > 1)
 		return (tab->width + 1);
 	return (1);
 }
