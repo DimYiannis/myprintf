@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:41 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 00:07:36 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:07:43 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int hex_len(unsigned int n)
 	return len;
 }
 
-unsigned int	hashflag(unsigned int n, char c, t_print *tab)
+unsigned int	hashflag(t_print *tab, unsigned int n, char c)
 {
 	unsigned int	len;
 
@@ -57,9 +57,10 @@ unsigned int	hashflag(unsigned int n, char c, t_print *tab)
 			return (len + ft_hexputnbr(n, 1));
 		}
 	}
+	return (len);
 }
 
-unsigned int	no_hashflag(unsigned int n, char c, t_print *tab)
+unsigned int	no_hashflag(t_print *tab, unsigned int n, char c)
 {
 	if (tab->hash && n != 0)
 	{
@@ -68,30 +69,32 @@ unsigned int	no_hashflag(unsigned int n, char c, t_print *tab)
 		else
 			return (ft_hexputnbr(n, 1));
 	}
+	return (0);
 }
 
 unsigned long	hex_case(t_print *tab, const char *c)
 {
 	unsigned long	len;
-
+	unsigned int u;
+	
 	len = 0;
 	if (*c == 'x' || *c == 'X')
 	{
 		u = va_arg(tab->args, unsigned int);
 		if (tab->hash && u != 0)
-			len = hashflag(u, *c, tab);
+			len = hashflag(tab, u, *c);
 		else if ((tab->width && tab->hash) || tab->width)
-			len = hex_hash_width(u, *c, tab);
+			len = hex_hash_width(tab, u, *c);
 		else if (tab->dash)
-			len = hex_dash_width_prec(u, *c, tab);
+			len = hex_dash_width_prec(tab, u,*c);
 		else if (tab->zero)
-			len = hex_width_zero(u, *c, tab);
+			len = hex_width_zero(tab, u, *c);
 		else if (tab->precision)
-			len = hex_precision(u, *c, tab);
+			len = hex_precision(tab, u, *c);
 		else if (tab->precision && tab->width)
-			len = hex_width_prec(u, *c, tab);
-		else if (tab->dash && tab->prec && tab->width)
-			len = hash_dash_width_prec(u, *c, tab);
+			len = hex_width_prec(tab, u);
+		else if (tab->dash && tab->precision && tab->width)
+			len = hash_dash_width_prec(tab, u, *c);
 	}
 	return (len);
 }
