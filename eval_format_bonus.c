@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 16:50:13 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 16:52:25 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int				check_width_precision(t_print *tab, const char *c);
 unsigned long	decide_conv(const char *c, t_print *tab);
+int				check_form(t_print *tab, char c);
 
 unsigned int	eval_format(const char *c, t_print *tab)
 {
@@ -23,8 +24,7 @@ unsigned int	eval_format(const char *c, t_print *tab)
 	while (!ft_isalpha(c[i]))
 	{
 		i += check_form(tab, c[i]);
-		
-		if (ft_isdigit(c) && c != '0')
+		if (ft_isdigit(c[i]) && c[i] != '0')
 			i += check_width_precision(tab, c);
 		if (c[i] == '-')
 		{
