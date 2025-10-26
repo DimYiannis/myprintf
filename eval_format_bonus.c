@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 16:36:45 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 16:50:13 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ unsigned int	eval_format(const char *c, t_print *tab)
 	i = 0;
 	while (!ft_isalpha(c[i]))
 	{
-		i += check_width_precision(tab, c);
+		i += check_form(tab, c[i]);
+		
+		if (ft_isdigit(c) && c != '0')
+			i += check_width_precision(tab, c);
 		if (c[i] == '-')
 		{
 			tab->dash = 1;
@@ -98,24 +101,12 @@ int	check_form(t_print *tab, char c)
 
 	i = 0;
 	if (c == ' ')
-	{
 		tab->sp = 1;
-		i++;
-	}
 	if (c == '+')
-	{
 		tab->sign = 1;
-		i++;
-	}
 	if (c == '#')
-	{
 		tab->hash = 1;
-		i++;
-	}
-	if (ft_isdigit(c) && c != '0')
-	{
-		tab->width = (c - '0');
-		i++;
-	}
+	else
+		return (0);
 	return (i);
 }
