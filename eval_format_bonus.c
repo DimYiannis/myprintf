@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/27 11:37:55 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 18:12:08 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,31 @@ int				check_form(t_print *tab, char c);
 unsigned int	eval_format(const char *c, t_print *tab)
 {
 	int	i;
+	int	advance;
 
 	i = 0;
 	while (c[i] && !ft_isalpha(c[i]) && c[i] != '%')
 	{
 		i += check_form(tab, c[i]);
-		if (ft_isdigit(c[i]) && c[i] != '0')
-			i += check_width_precision(tab, &c[i]);
 		if (c[i] == '-')
 		{
 			tab->dash = 1;
 			i++;
+			continue ;
 		}
 		if (c[i] == '0')
 		{
 			tab->zero = 1;
 			i++;
+			continue ;
 		}
+		if (ft_isdigit(c[i]) || c[i] == '.')
+		{
+			advance = check_width_precision(tab, &c[i]);
+			i += advance;
+			continue ;
+		}
+		break ;
 	}
 	if (ft_isalpha(c[i]) || c[i] == '%')
 	{
@@ -53,7 +61,7 @@ unsigned long	decide_conv(const char *c, t_print *tab)
 	if (*c == 'd' || *c == 'i')
 		i += int_case(tab);
 	else if (*c == 'c')
-		i += char_case(tab, *c);
+		i += char_case(tab);
 	else if (*c == 's')
 		i += string_case(tab);
 	else if (*c == 'x' || *c == 'X')
@@ -69,8 +77,8 @@ unsigned long	decide_conv(const char *c, t_print *tab)
 
 int	check_width_precision(t_print *tab, const char *c)
 {
-	int	n;
 	int	i;
+	int	n;
 
 	i = 0;
 	n = 0;
@@ -80,17 +88,16 @@ int	check_width_precision(t_print *tab, const char *c)
 		tab->width = n;
 		i++;
 	}
-	n = 0;
 	if (c[i] == '.')
 	{
-		tab->pnt = 1;
 		i++;
+		n = 0;
 		while (ft_isdigit(c[i]))
 		{
 			n = n * 10 + (c[i] - '0');
-			tab->precision = n;
 			i++;
 		}
+		tab->precision = n;
 	}
 	return (i);
 }
