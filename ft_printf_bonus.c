@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/27 17:26:52 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 22:40:23 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_print	*tab_initialise(t_print *tab)
 {
 	tab->width = 0;
-	tab->precision = 0;
+	tab->precision = -1;
 	tab->zero = 0;
 	tab->dash = 0;
 	tab->total_length = 0;
@@ -29,6 +29,7 @@ int	ft_printf(const char *type, ...)
 {
 	t_print	*tab;
 	int		i;
+	int counter;
 
 	tab = malloc(sizeof(t_print));
 	if (!tab)
@@ -50,8 +51,9 @@ int	ft_printf(const char *type, ...)
 		}
 	}
 	va_end(tab->args);
+	counter = tab->total_length;
 	free(tab);
-	return (tab->total_length);
+	return (counter);
 }
 
 unsigned int putchar_n(char c, unsigned int n)
@@ -68,8 +70,8 @@ unsigned int putchar_n(char c, unsigned int n)
 unsigned int putstring_n(char *s, unsigned int n)
 {
     unsigned int i = 0;
-    if (!s)
-        s = "(null)";
+	if (!s || n == 0)
+        return 0;
     while (s[i] && i < n)
     {
         write(1, &s[i], 1);
