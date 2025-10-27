@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:17:48 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/27 10:12:04 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 17:26:06 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,15 @@ typedef struct s_print
 	int			width;
 	int			precision;
 	int			zero;
-	int			pnt;
 	int			dash;
 	int			total_length;
 	int			sign;
-	int			is_zero;
-	int			perc;
 	int			sp;
 	int			hash;
+	int			pnt_zero;
 }				t_print;
 
-int				char_case(t_print *tab, char c);
+int				char_case(t_print *tab);
 int				string_case(t_print *tab);
 int				pointer_case(t_print *tab);
 unsigned long	hex_case(t_print *tab, const char *c);
@@ -62,5 +60,6 @@ int				hex_precision(t_print *tab, unsigned int n, char c);
 int				hex_len(unsigned int n);
 int				count_digits(uintptr_t n);
 int				dash_width_prec(t_print *tab, char *tmp, int len);
+char			*ft_unsigneditoa(unsigned int n);
 
 #endif
