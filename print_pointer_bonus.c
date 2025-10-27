@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 22:04:42 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 23:11:48 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,19 @@ static int	ft_ptrputnbr(unsigned long n)
 	return (len);
 }
 
-int	count_digits(uintptr_t n)
+static int	count_hex_digits(uintptr_t n)
 {
 	int count;
 	
-	count = 1;
-    while (n >= 16)
-    {
-        n /= 16;
-        count++;
-    }
-    return (count);
+	if (n == 0)
+		return (1);
+	count = 0;
+	while (n > 0)
+	{
+		n /= 16;
+		count++;
+	}
+	return (count);
 }
 
 int	pointer_case(t_print *tab)
@@ -50,7 +52,7 @@ int	pointer_case(t_print *tab)
 	padding = 0;
 	if (!addr)
 			return (write(1, "(nil)", 5));
-	len = 2 + count_digits(addr);
+	len = 2 + count_hex_digits(addr);
 	if (len < tab->width)
 		padding = tab->width - len;
 	if (tab->dash)
