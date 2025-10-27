@@ -6,57 +6,61 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:44 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/27 16:33:23 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 18:06:17 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	int_case(t_print *tab)
+int int_case(t_print *tab)
 {
-	char	*tmp;
-	int		len;
-	int		num;
-	int		padding;
-	int		neg;
+    char *tmp;
+    int num, len;
+    int padding, leading_zeros, neg;
 
-	neg = 0;
-	num = va_arg(tab->args, int);
-	if (num < 0)
-	{
-		num = -num;
-		neg = 1;
-		padding = -1;
-	}
-	tmp = ft_itoa(num);
-	if (!tmp)
-		return (0);
-	len = ft_strlen(tmp);
-	if (tab->precision && tab->precision < len)
-		len = tab->precision;
-	if (tab->width > len)
-		padding = tab->width - len;
-	if (!neg)
-	{
-		if (tab->sign)
-			tab->total_length += write(1, "+", 1);
-		else if (tab->sp)
-			tab->total_length += write(1, " ", 1);
-	}
-	if (tab->precision > len)
-	{
-		tab->total_length += putchar_n('0', tab->precision - len);
-		padding = padding - (tab->precision - len);
-	}
-	if (!tab->dash)
-		tab->total_length += putchar_n(' ', padding);
-	if (neg)
-	{
-		tab->total_length += write(1, "-", 1);
-		padding--;
-	}
-	tab->total_length += putstring_n(tmp++, len);
-	if (tab->dash)
-		tab->total_length += putchar_n(' ', padding);
-	return (tab->total_length);
+    num = va_arg(tab->args, int);
+    neg = 0;
+    if (num < 0)
+    {
+        num = -num;
+        neg = 1;
+    }
+
+    tmp = ft_itoa(num);
+    if (!tmp)
+        return 0;
+
+    len = ft_strlen(tmp);
+
+    leading_zeros = 0;
+    if (tab->precision > len)
+        leading_zeros = tab->precision - len;
+
+    padding = tab->width - (len + leading_zeros);
+    if (neg || tab->sign || tab->sp)
+        padding--;
+    if (padding < 0)
+        padding = 0;
+
+    if (!tab->dash && (!tab->zero || tab->precision > 0))
+        tab->total_length += putchar_n(' ', padding);
+
+    if (neg)
+        tab->total_length += write(1, "-", 1);
+    else if (tab->sign)
+        tab->total_length += write(1, "+", 1);
+    else if (tab->sp)
+        tab->total_length += write(1, " ", 1);
+
+    if (!tab->dash && tab->zero && tab->precision <= 0)
+        tab->total_length += putchar_n('0', padding);
+    tab->total_length += putchar_n('0', leading_zeros);
+
+    tab->total_length += putstring_n(tmp, len);
+
+    if (tab->dash)
+        tab->total_length += putchar_n(' ', padding);
+
+    free(tmp);
+    return tab->total_length;
 }
