@@ -6,13 +6,13 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:44 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 22:35:59 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 09:37:35 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	int_case(t_print *tab, char c)
+int	int_case(t_print *tab)
 {
 	char	*tmp;
 	int		len;

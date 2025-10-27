@@ -5,7 +5,7 @@ NAME = libftprintf.a
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC =  ft_printf.c header.c
+SRC =  ft_printf_bonus.c header.c
 OBJ = $(SRC:.c=.o)
 
 BONUS_SRC = print_percent_bonus.c print_char_bonus.c print_hex_bonus.c print_int_bonus.c \

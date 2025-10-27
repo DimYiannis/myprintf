@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 21:34:00 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 11:37:55 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int				check_form(t_print *tab, char c);
 
 unsigned int	eval_format(const char *c, t_print *tab)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	while (c[i] && !ft_isalpha(c[i]) && c[i] != '%')
@@ -36,11 +36,11 @@ unsigned int	eval_format(const char *c, t_print *tab)
 			tab->zero = 1;
 			i++;
 		}
-		if (ft_isalpha(c[i]) || c[i] == '%')
-		{
-			i += decide_conv(&c[i], tab);
-			break ;
-		}
+	}
+	if (ft_isalpha(c[i]) || c[i] == '%')
+	{
+		decide_conv(&c[i], tab);
+		i++;
 	}
 	return (i);
 }
@@ -51,7 +51,7 @@ unsigned long	decide_conv(const char *c, t_print *tab)
 
 	i = 0;
 	if (*c == 'd' || *c == 'i')
-		i += int_case(tab, *c);
+		i += int_case(tab);
 	else if (*c == 'c')
 		i += char_case(tab, *c);
 	else if (*c == 's')
@@ -69,8 +69,8 @@ unsigned long	decide_conv(const char *c, t_print *tab)
 
 int	check_width_precision(t_print *tab, const char *c)
 {
-	int	i;
 	int	n;
+	int	i;
 
 	i = 0;
 	n = 0;
@@ -103,17 +103,17 @@ int	check_form(t_print *tab, char c)
 	if (c == ' ')
 	{
 		tab->sp = 1;
-		i = 1;
+		i += 1;
 	}
 	else if (c == '+')
 	{
 		tab->sign = 1;
-		i = 1;
+		i += 1;
 	}
 	else if (c == '#')
 	{
 		tab->hash = 1;
-		i = 1;
+		i += 1;
 	}
 	else
 		return (0);

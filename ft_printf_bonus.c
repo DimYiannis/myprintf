@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 22:43:03 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 11:13:35 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,12 @@ static t_print	*tab_initialise(t_print *tab)
 int	ft_printf(const char *type, ...)
 {
 	t_print	*tab;
-	int		count;
 	int		i;
 
 	tab = malloc(sizeof(t_print));
 	if (!tab)
 		return (-1);
 	tab_initialise(tab);
-	count = 0;
 	i = 0;
 	va_start(tab->args, type);
 	while (type[i])
@@ -45,18 +43,17 @@ int	ft_printf(const char *type, ...)
 		if (type[i] == '%' && type[i + 1])
 		{
 			i += eval_format(&type[i + 1], tab);
-			tab_initialise(tab);
+			i++;
 		}	
 		else
 		{
-			count += write(1, &type[i], 1);
+			tab->total_length += write(1, &type[i], 1);
 			i++;
 		}
 	}
 	va_end(tab->args);
-	count += tab->total_length;
 	free(tab);
-	return (count);
+	return (tab->total_length);
 }
 
 unsigned int putchar_n(char c, unsigned int n)
@@ -70,7 +67,7 @@ unsigned int putchar_n(char c, unsigned int n)
     return i;
 }
 
-unsigned int putstring_n(const char *s, unsigned int n)
+unsigned int putstring_n(char *s, unsigned int n)
 {
     unsigned int i = 0;
     if (!s)

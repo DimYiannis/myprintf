@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:46:41 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 16:16:24 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:08:16 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	hex_hash_width(t_print *tab, unsigned int n, char c)
 	{
 		if (len < tab->width)
 		{
-			len = putnchar(' ', tab->width - len);
+			len = putchar_n(' ', tab->width - len);
 			len += hashflag(tab, n, c);
 		}
 		else
@@ -31,7 +31,7 @@ int	hex_hash_width(t_print *tab, unsigned int n, char c)
 	{
 		if (len < tab->width)
 		{
-			len = putnchar(' ', tab->width - len);
+			len = putchar_n(' ', tab->width - len);
 			len += no_hashflag(tab, n, c);
 		}
 		else
@@ -50,16 +50,16 @@ int	hex_dash_width_prec(t_print *tab, unsigned int n, char c)
 		if (len < tab->width)
 		{
 			len = no_hashflag(tab, n, c);
-			len += putnchar(' ', tab->width - len);
+			len += putchar_n(' ', tab->width - len);
 		}
 		else if (tab->precision)
 		{
 			if (len < tab->precision)
 			{
-				len = putnchar('0', tab->precision - len);
+				len = putchar_n('0', tab->precision - len);
 				len += no_hashflag(tab, n, c);
 				if (tab->width > tab->precision)
-					len += putnchar(' ', tab->width - tab->precision);
+					len += putchar_n(' ', tab->width - tab->precision);
 			}
 			else
 				len = no_hashflag(tab, n, c);
@@ -79,7 +79,7 @@ int	hex_width_zero(t_print *tab, unsigned int n, char c)
 	{
 		if (len < tab->width)
 		{
-			len = putnchar('0', tab->width - len);
+			len = putchar_n('0', tab->width - len);
 			len += no_hashflag(tab, n, c);
 		}
 		else
@@ -89,7 +89,7 @@ int	hex_width_zero(t_print *tab, unsigned int n, char c)
 	{
 		if (len < tab->width)
 		{
-			len = putnchar('0', tab->width - len);
+			len = putchar_n('0', tab->width - len);
 			len += hashflag(tab, n, c);
 		}
 		else
@@ -105,10 +105,10 @@ int hex_precision(t_print *tab,  unsigned int n, char c)
 	hex_len(n);
 	if (tab->hash)
 	{
-		len = putnchar('0', tab->width - tab->precision);
+		len = putchar_n('0', tab->width - tab->precision);
 		if (len < tab->precision)
 		{
-			len += putnchar('0', tab->precision - len);
+			len += putchar_n('0', tab->precision - len);
 			len += hashflag(tab, len, c);
 		}
 		else
@@ -116,10 +116,10 @@ int hex_precision(t_print *tab,  unsigned int n, char c)
 	}
 	else
 	{
-		len = putnchar('0', tab->width - tab->precision);
+		len = putchar_n('0', tab->width - tab->precision);
 		if (len < tab->precision)
 		{
-			len += putnchar('0', tab->precision - len);
+			len += putchar_n('0', tab->precision - len);
 			len += no_hashflag(tab, len, c);
 		}
 		else
@@ -137,10 +137,10 @@ int	hex_width_prec(t_print *tab,  unsigned int n, const char c)
 	{
 		if (len < tab->width)
 		{
-			len = putnchar(' ', tab->width - tab->precision);
+			len = putchar_n(' ', tab->width - tab->precision);
 			if (len < tab->precision)
 			{
-				len += putnchar('0', tab->precision - len);
+				len += putchar_n('0', tab->precision - len);
 				len += hashflag(tab, n, c);
 			}
 			else
@@ -153,10 +153,10 @@ int	hex_width_prec(t_print *tab,  unsigned int n, const char c)
 	{
 		if (len < tab->width)
 		{
-			len = putnchar(' ', tab->width - tab->precision);
+			len = putchar_n(' ', tab->width - tab->precision);
 			if (len < tab->precision)
 			{
-				len += putnchar('0', tab->precision - len);
+				len += putchar_n('0', tab->precision - len);
 				len += no_hashflag(tab, n, c);
 			}
 			else
@@ -178,16 +178,16 @@ int	hash_dash_width_prec(t_print *tab, unsigned int n, char c)
 		if (len < tab->width)
 		{
 			len = hashflag(tab, n, c);
-			len += putnchar(' ', tab->width - len);
+			len += putchar_n(' ', tab->width - len);
 		}
 		else if (tab->precision)
 		{
 			if (len < tab->precision)
 			{
-				len = putnchar('0', tab->precision - len);
+				len = putchar_n('0', tab->precision - len);
 				len += hashflag(tab, n, c);
 				if (tab->width > tab->precision)
-					len += putnchar(' ', tab->width - tab->precision);
+					len += putchar_n(' ', tab->width - tab->precision);
 			}
 			else
 				len = hashflag(tab, n, c);
@@ -200,16 +200,16 @@ int	hash_dash_width_prec(t_print *tab, unsigned int n, char c)
 		if (len < tab->width)
 		{
 			len += no_hashflag(tab, n, c);
-			len += putnchar(' ', tab->width - len);
+			len += putchar_n(' ', tab->width - len);
 		}
 		else if (tab->precision)
 		{
 			if (len < tab->precision)
 			{
-				len += putnchar('0', tab->precision - len);
+				len += putchar_n('0', tab->precision - len);
 				len += no_hashflag(tab, n, c);
 				if (tab->width > tab->precision)
-					len += putnchar(' ', tab->width - tab->precision);
+					len += putchar_n(' ', tab->width - tab->precision);
 			}
 			else
 				len += no_hashflag(tab, n, c);

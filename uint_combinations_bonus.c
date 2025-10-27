@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:14:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 22:08:18 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:13:32 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	dash_width_prec(t_print *tab, char *tmp, int len)
 	return (len);
 }
 
-int	prec(t_print *tab, char tmp, int len)
+int	prec(t_print *tab, char *tmp, int len)
 {
 	if (tab->precision)
 	{

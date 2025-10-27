@@ -6,18 +6,18 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:17:48 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 22:03:03 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:12:04 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_BONUS_H
 # define FT_PRINTF_BONUS_H
 # include "libft/libft.h"
+# include <stdarg.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdarg.h>
 
 typedef struct s_print
 {
@@ -39,7 +39,7 @@ int				char_case(t_print *tab, char c);
 int				string_case(t_print *tab);
 int				pointer_case(t_print *tab);
 unsigned long	hex_case(t_print *tab, const char *c);
-int				int_case(t_print *tab, char c);
+int				int_case(t_print *tab);
 int				unsigned_case(t_print *tab);
 int				percent_case(t_print *tab, char c);
 int				ft_printf(const char *type, ...);
@@ -51,8 +51,8 @@ int				width_prec(t_print *tab, char *tmp, int len);
 int				dash_prec(t_print *tab, char *tmp, int len);
 int				hex_hash_width(t_print *tab, unsigned int n, char c);
 unsigned int	hashflag(t_print *tab, unsigned int n, char c);
-unsigned int putchar_n(char c, unsigned int n);
-unsigned int putstring_n(const char *s, unsigned int n);
+unsigned int	putchar_n(char c, unsigned int n);
+unsigned int	putstring_n(char *s, unsigned int n);
 int				hex_dash_width_prec(t_print *tab, unsigned int n, char c);
 int				hex_width_zero(t_print *tab, unsigned int n, char c);
 unsigned int	no_hashflag(t_print *tab, unsigned int n, char c);

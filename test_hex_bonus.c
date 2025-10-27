@@ -12,17 +12,17 @@ int	main(void)
 	unsigned int	u = 4294967295;
 	int		x = 3735928559; // 0xDEADBEEF
 
-    int n1 = printf("printf:    |%10d|\n", 42);
-    int n2 = ft_printf("ft_printf: |%10d|\n", 42);
+    int n1 = printf("printf:    |%010d|\n", -42);
+    int n2 = ft_printf("ft_printf: |%010d|\n", -42);
     printf("printf: %d, ft_printf: %d\n", n1, n2);
 
-    ft_printf("Char test: |%c|\n", 'A');
-    ft_printf("String test: |%s|\n", "Hello");
-    ft_printf("Pointer test: |%p|\n", (void *)0x12345);
-    ft_printf("Unsigned: |%u|\n", 3000000000u);
-    ft_printf("Hex lower: |%x|\n", 3735928559u);
-    ft_printf("Hex upper: |%X|\n", 3735928559u);
-    ft_printf("Percent: |%%|\n");
+    // ft_printf("Char test: |%c|\n", 'A');
+    // ft_printf("String test: |%s|\n", "Hello");
+    // ft_printf("Pointer test: |%p|\n", (void *)0x12345);
+    // ft_printf("Unsigned: |%u|\n", 3000000000u);
+    // ft_printf("Hex lower: |%x|\n", 3735928559u);
+    // ft_printf("Hex upper: |%X|\n", 3735928559u);
+    // ft_printf("Percent: |%%|\n");
     
 	// printf("========= BASIC TESTS =========\n");
 	// printf("1. Char:\n");
