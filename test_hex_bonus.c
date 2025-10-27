@@ -13,27 +13,70 @@ int	main(void)
 	int		x = 3735928559; // 0xDEADBEEF
 	unsigned int n = 42;
 
+	printf("printf:    |%d|\n", n);
 	ft_printf("ft_printf: |%d|\n", n);
+	printf("\n");
+	
+	printf("printf:    |%5d|\n", n);
 	ft_printf("ft_printf: |%5d|\n", n);
+	printf("\n");
+	
+	printf("printf:    |%-5d|\n", n);
 	ft_printf("ft_printf: |%-5d|\n", n);
+	printf("\n");
+	
+	printf("printf:    |%05d|\n", n);
 	ft_printf("ft_printf: |%05d|\n", n);
+	printf("\n");
+	
+	printf("printf:    |%.3d|\n", n);
 	ft_printf("ft_printf: |%.3d|\n", n);
+	printf("\n");
+	
+	printf("printf:    |%8.5d|\n", n);
 	ft_printf("ft_printf: |%8.5d|\n", n);
+	printf("\n");
+	
+	printf("printf:    |%-8.5d|\n", n);
 	ft_printf("ft_printf: |%-8.5d|\n", n);
+	printf("\n");
+	
+	printf("printf:    |%8.0d|\n", 0);
 	ft_printf("ft_printf: |%8.0d|\n", 0);
+	printf("\n");
 
-    int n1 = printf("printf:    |%.2d|\n", d);
-    int n2 = ft_printf("ft_printf: |%.2d|\n", d);
-    printf("printf: %d, ft_printf: %d\n", n1, n2);
+	int n1 = printf("printf:    |%.2d|\n", d);
+	int n2 = ft_printf("ft_printf: |%.2d|\n", d);
+	printf("Return: printf=%d, ft_printf=%d\n\n", n1, n2);
 
-    ft_printf("Char test: |%c|\n", 'A');
-    ft_printf("String test: |%s|\n", "Hello");
-    ft_printf("Pointer test: |%p|\n", (void *)0x12345);
-    ft_printf("Unsigned: |%u|\n", 3000000000u);
-    ft_printf("Hex lower: |%x|\n", 3735928559u);
-    ft_printf("Hex upper: |%X|\n", 3735928559u);
-    ft_printf("Percent: |%%|\n");
-    
+	printf("printf:    Char test: |%c|\n", 'A');
+	ft_printf("ft_printf: Char test: |%c|\n", 'A');
+	printf("\n");
+	
+	printf("printf:    String test: |%s|\n", "Hello");
+	ft_printf("ft_printf: String test: |%s|\n", "Hello");
+	printf("\n");
+	
+	printf("printf:    Pointer test: |%p|\n", (void *)0x12345);
+	ft_printf("ft_printf: Pointer test: |%p|\n", (void *)0x12345);
+	printf("\n");
+	
+	printf("printf:    Unsigned: |%u|\n", 3000000000u);
+	ft_printf("ft_printf: Unsigned: |%u|\n", 3000000000u);
+	printf("\n");
+	
+	printf("printf:    Hex lower: |%x|\n", 3735928559u);
+	ft_printf("ft_printf: Hex lower: |%x|\n", 3735928559u);
+	printf("\n");
+	
+	printf("printf:    Hex upper: |%X|\n", 3735928559u);
+	ft_printf("ft_printf: Hex upper: |%X|\n", 3735928559u);
+	printf("\n");
+	
+	printf("printf:    Percent: |%%|\n");
+	ft_printf("ft_printf: Percent: |%%|\n");
+	printf("\n");
+	
 	printf("========= BASIC TESTS =========\n");
 	printf("1. Char:\n");
 	printf("   printf:    |%c|\n", c);
@@ -98,8 +141,8 @@ int	main(void)
 	ft_printf("   ft_printf: |%+d|\n", d);
 
 	printf("\n7. Hash flag (hex):\n");
-	printf("   printf:    |%#x| %#X|\n", x, x);
-	ft_printf("   ft_printf: |%#x| %#X|\n", x, x);
+	printf("   printf:    |%#x| |%#X|\n", x, x);
+	ft_printf("   ft_printf: |%#x| |%#X|\n", x, x);
 
 	printf("\n8. Combination: space + plus (should prioritize plus):\n");
 	printf("   printf:    |% +d|\n", i);
