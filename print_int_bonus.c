@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:44 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/27 09:37:35 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 12:39:11 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ int	int_case(t_print *tab)
 	if (tab->width > len && tab->dash == 0)
 	{
 		if (tab->zero && !tab->pnt)
+		{
+			tmp = ft_itoa(-num);
+			tab->total_length += write(1, "-", 1);
 			tab->total_length += putchar_n('0', tab->width - len);
+		}
 		else
 			tab->total_length += putchar_n(' ', tab->width - len);
 	}
