@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:14:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 16:22:33 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 22:08:18 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@ int	width_prec(t_print *tab, char *tmp, int len)
 		{
 			if (tab->precision)
 			{
-				len = putnchar(' ', tab->width - tab->precision);
+				len = putchar_n(' ', tab->width - tab->precision);
 				if (len < tab->precision)
 				{
-					len += putnchar('0', tab->precision - len);
-					len += putnchar(*tmp, len);
+					len += putchar_n('0', tab->precision - len);
+					len += putstring_n(tmp, len);
 				}
 				else
-					len += putnchar(*tmp, len);
+					len += putstring_n(tmp, len);
 			}
 			else
 			{
-				len = putnchar(' ', tab->width - len);
-				len += putnchar(*tmp, len);
+				len = putchar_n(' ', tab->width - len);
+				len += putstring_n(tmp, len);
 			}
 		}
 		else
-			len += putnchar(*tmp, len);
+			len += putstring_n(tmp, len);
 	}
 	return (len);
 }
@@ -49,40 +49,40 @@ int	dash_width_prec(t_print *tab, char *tmp, int len)
 		{
 			if (len < tab->width)
 			{
-				putnchar(*tmp, len);
-				len += putnchar(' ', tab->width - len);
+				putstring_n(tmp, len);
+				len += putchar_n(' ', tab->width - len);
 			}
 			else if (tab->precision)
 			{
 				if (len < tab->precision)
 				{
-					len += putnchar('0', tab->precision - len);
-					len += putnchar(*tmp, len);
+					len += putchar_n('0', tab->precision - len);
+					len += putstring_n(tmp, len);
 					if (tab->width > tab->precision)
-						len += putnchar(' ', tab->width - tab->precision);
+						len += putchar_n(' ', tab->width - tab->precision);
 				}
 				else
-					len += putnchar(*tmp, len);
+					len += putstring_n(tmp, len);
 			}
 			else
-				len = putnchar(*tmp, len);
+				len = putstring_n(tmp, len);
 		}
 	}
 	return (len);
 }
 
-int	prec(t_print *tab, char *tmp, int len)
+int	prec(t_print *tab, char tmp, int len)
 {
 	if (tab->precision)
 	{
-		len = putnchar('0', tab->width - tab->precision);
+		len = putchar_n('0', tab->width - tab->precision);
 		if (len < tab->precision)
 		{
-			len += putnchar('0', tab->precision - len);
-			len += putnchar(*tmp, len);
+			len += putchar_n('0', tab->precision - len);
+			len += putstring_n(tmp, len);
 		}
 		else
-			len += putnchar(*tmp, len);
+			len += putstring_n(tmp, len);
 	}
 	return (len);
 }
@@ -93,11 +93,11 @@ int	width_zero(t_print *tab, char *tmp, int len)
 	{
 		if (len < tab->width)
 		{
-			len = putnchar('0', tab->width - len);
-			len += putnchar(*tmp, len);
+			len = putchar_n('0', tab->width - len);
+			len += putstring_n(tmp, len);
 		}
 		else
-			len = putnchar(*tmp, len);
+			len = putstring_n(tmp, len);
 	}
 	return (len);
 }
@@ -109,14 +109,14 @@ int	dash_prec(t_print *tab, char *tmp, int len)
 		{
 			if (len < tab->precision)
 			{
-				len += putnchar('0', tab->precision - len);
-				len += putnchar(*tmp, len);
+				len += putchar_n('0', tab->precision - len);
+				len += putstring_n(tmp, len);
 			}
 			else
-				len += putnchar(*tmp, len);
+				len += putstring_n(tmp, len);
 		}
 		else
-			len = putnchar(*tmp, len);
+			len = putstring_n(tmp, len);
 	}
 	return (len);
 }

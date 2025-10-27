@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:44 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 14:16:16 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 22:35:59 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,93 +23,21 @@ int	int_case(t_print *tab, char c)
 	if (!tmp)
 		return (0);
 	len = ft_strlen(tmp);
-	if (c == 'i' || c == 'd')
+	if (tab->width > len && tab->dash == 0)
 	{
-		if (tab->width)
-		{
-			if (len < tab->width)
-			{
-				if (tab->precision)
-				{
-					len = putnchar(' ', tab->width - tab->precision);
-					if (len < tab->precision)
-					{
-						len += putnchar(' ', tab->precision - len);
-						len += putnchar(*tmp, len);
-					}
-					else
-						len += putnchar(*tmp, len);
-				}
-				else
-				{
-					len = putnchar(' ', tab->width - len);
-					len += putnchar(*tmp, len);
-				}
-			}
-			else
-				len = putnchar(*tmp, len);
-		}
-		else if (tab->width && tab->sign)
-		{
-			if (num <= 0)
-			{
-				if (len < tab->width)
-				{
-					len = putnchar(' ', tab->width - len);
-					len += putnchar(*tmp, len);
-				}
-				else
-					len = putnchar(*tmp, len);
-			}
-			else
-			{
-				if (len < tab->width)
-				{
-					len = putnchar(' ', tab->width - len - 1);
-					len += write(1, "+", 1);
-					len += putnchar(*tmp, len);
-				}
-				else
-					len = putnchar(*tmp, len);
-			}
-		}
-		else if (tab->sp)
-		{
-			len = write(1, " ", 1);
-			len += putnchar(*tmp, len);
-			if (tab->width)
-			{
-				if (len > tab->width)
-					len = putnchar(*tmp, len);
-				else
-				{
-					len = putnchar(' ', tab->width - len);
-					len += putnchar(*tmp, len);
-				}
-			}
-		}
-		else if (tab->width && tab->zero)
-		{
-			len = putnchar('0', tab->width - len);
-			len += putnchar(*tmp, len);
-		}
-		else if (tab->dash)
-		{
-			if (tab->width)
-			{
-				if (len < tab->width)
-				{
-					putnchar(*tmp, len);
-					len += putnchar(' ', tab->width - len);
-				}
-				else
-					putnchar(*tmp, len);
-			}
-			else
-				putnchar(*tmp, len);
-		}
+		if (tab->zero && !tab->pnt)
+			tab->total_length += putchar_n('0', tab->width - len);
+		else
+			tab->total_length += putchar_n(' ', tab->width - len);
 	}
-	putnchar(*tmp, len);
+	if (tab->sign && num > 0)
+		tab->total_length += write(1, "+", 1);
+	else if (tab->sp && num >= 0)
+		tab->total_length += write(1," ", 1);
+	
+	tab->total_length += putstring_n(tmp, len);
+	if (tab->width > len && tab->dash == 1)
+		tab->total_length += putchar_n(' ', tab->width - len);
 	free(tmp);
-	return (len);
+	return (tab->total_length);
 }

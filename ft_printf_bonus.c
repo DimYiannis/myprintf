@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 14:50:54 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 22:43:03 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_print	*tab_initialise(t_print *tab)
 	tab->hash = 0;
 	return (tab);
 }
-int	ft_printf_bonus(const char *type, ...)
+int	ft_printf(const char *type, ...)
 {
 	t_print	*tab;
 	int		count;
@@ -43,9 +43,15 @@ int	ft_printf_bonus(const char *type, ...)
 	while (type[i])
 	{
 		if (type[i] == '%' && type[i + 1])
-			i = eval_format(&type[i + 1], tab);
+		{
+			i += eval_format(&type[i + 1], tab);
+			tab_initialise(tab);
+		}	
 		else
+		{
 			count += write(1, &type[i], 1);
+			i++;
+		}
 	}
 	va_end(tab->args);
 	count += tab->total_length;
@@ -53,12 +59,26 @@ int	ft_printf_bonus(const char *type, ...)
 	return (count);
 }
 
-unsigned int	putnchar(char c, unsigned int n)
+unsigned int putchar_n(char c, unsigned int n)
 {
-	unsigned int	count;
+    unsigned int i = 0;
+    while (i < n)
+    {
+        write(1, &c, 1);
+        i++;
+    }
+    return i;
+}
 
-	count = n;
-	while (n-- > 0)
-		write(1, &c, 1);
-	return (count);
+unsigned int putstring_n(const char *s, unsigned int n)
+{
+    unsigned int i = 0;
+    if (!s)
+        s = "(null)";
+    while (s[i] && i < n)
+    {
+        write(1, &s[i], 1);
+        i++;
+    }
+    return i;
 }

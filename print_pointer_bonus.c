@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/26 14:37:30 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/26 22:04:42 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ int	pointer_case(t_print *tab)
 	{
 		len = write(1, "0x", 2);
 		len += ft_ptrputnbr(addr);
-		return (len + putnchar(' ', padding));
+		return (len + putchar_n(' ', padding));
 	}
 	else
 	{
-		len =putnchar(' ', padding);
+		len =putchar_n(' ', padding);
 		len += write(1, "0x", 2);
 		return (len + ft_ptrputnbr(addr));
 	}
