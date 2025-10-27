@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/27 18:12:08 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/27 23:47:44 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,16 @@
 
 int				check_width_precision(t_print *tab, const char *c);
 unsigned long	decide_conv(const char *c, t_print *tab);
-int				check_form(t_print *tab, char c);
+int	check_flags(t_print *tab, const char *c);
 
 unsigned int	eval_format(const char *c, t_print *tab)
 {
 	int	i;
-	int	advance;
 
 	i = 0;
-	while (c[i] && !ft_isalpha(c[i]) && c[i] != '%')
-	{
-		i += check_form(tab, c[i]);
-		if (c[i] == '-')
-		{
-			tab->dash = 1;
-			i++;
-			continue ;
-		}
-		if (c[i] == '0')
-		{
-			tab->zero = 1;
-			i++;
-			continue ;
-		}
-		if (ft_isdigit(c[i]) || c[i] == '.')
-		{
-			advance = check_width_precision(tab, &c[i]);
-			i += advance;
-			continue ;
-		}
-		break ;
-	}
+	i += check_flags(tab, &c[i]);
+	if (ft_isdigit(c[i]) || c[i] == '.')
+		i += check_width_precision(tab, &c[i]);
 	if (ft_isalpha(c[i]) || c[i] == '%')
 	{
 		decide_conv(&c[i], tab);
@@ -85,9 +64,9 @@ int	check_width_precision(t_print *tab, const char *c)
 	while (ft_isdigit(c[i]))
 	{
 		n = n * 10 + (c[i] - '0');
-		tab->width = n;
 		i++;
 	}
+	tab->width = n;
 	if (c[i] == '.')
 	{
 		i++;
@@ -102,27 +81,27 @@ int	check_width_precision(t_print *tab, const char *c)
 	return (i);
 }
 
-int	check_form(t_print *tab, char c)
+int	check_flags(t_print *tab, const char *c)
 {
 	int	i;
 
 	i = 0;
-	if (c == ' ')
+	while (c[i])
 	{
-		tab->sp = 1;
-		i += 1;
+		if (c[i] == '-')
+			tab->dash = 1;
+		else if (c[i] == ' ')
+			tab->sp = 1;
+		else if (c[i] == '+')
+			tab->sign = 1;
+		else if (c[i] == '#')
+			tab->hash = 1;
+		else if (c[i] == '0')
+			tab->zero = 1;
+		else
+			break;  // Not a recognized flag character
+		i++;
 	}
-	else if (c == '+')
-	{
-		tab->sign = 1;
-		i += 1;
-	}
-	else if (c == '#')
-	{
-		tab->hash = 1;
-		i += 1;
-	}
-	else
-		return (0);
 	return (i);
 }
+
