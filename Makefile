@@ -5,12 +5,12 @@ NAME = libftprintf.a
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC =  ft_printf_bonus.c header.c
+SRC =  ft_printf.c header.c
 OBJ = $(SRC:.c=.o)
 
-BONUS_SRC = print_percent_bonus.c print_char_bonus.c print_hex_bonus.c print_int_bonus.c \
-print_pointer_bonus.c print_string_bonus.c print_uint_bonus.c ft_printf_bonus.c \
-hex_combinations_bonus.c uint_combinations_bonus.c eval_format_bonus.c
+BONUS_SRC = ft_printf_bonus.c print_percent_bonus.c print_char_bonus.c print_hex_bonus.c print_int_bonus.c \
+print_pointer_bonus.c print_string_bonus.c print_uint_bonus.c \
+uint_combinations_bonus.c eval_format_bonus.c hex_helpers_bonus.c
 BONUS_OBJ = $(BONUS_SRC:.c=.o)	
 
 %.o: %.c ft_printf.h
@@ -23,10 +23,10 @@ $(NAME): $(OBJ)
 
 all: $(NAME)
 
-bonus: $(OBJ) $(BONUS_OBJ)
+bonus: $(BONUS_OBJ)
 	make -C $(LIBFT_DIR)
 	cp $(LIBFT) $(NAME)
-	ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
+	ar rcs $(NAME) $(BONUS_OBJ)
 
 clean:
 	make -C $(LIBFT_DIR) clean
