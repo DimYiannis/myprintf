@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 20:25:38 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/28 20:31:17 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,10 @@ int	ft_printf(const char *type, ...)
 	while (type[i])
 	{
 		if (type[i] == '%' && type[i + 1])
-		{
-			i += eval_format(&type[i + 1], tab);
-			i++;
-		}	
+			i += eval_format(&type[i + 1], tab);	
 		else
-		{
-			tab->total_length += write(1, &type[i], 1);
-			i++;
-		}
+			tab->total_length += write(1, &type[i], 1);	
+		i++;
 	}
 	va_end(tab->args);
 	counter = tab->total_length;
