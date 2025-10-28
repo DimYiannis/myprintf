@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:44 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/29 00:14:40 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 00:37:46 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,37 @@ static int prec(t_print *tab, char *tmp, int num)
     return (len);
 }
 
+static char	*get_int_string(long long *num, int *neg)
+{
+	char	*tmp;
+
+	if (*num == INT_MIN)
+	{
+		tmp = ft_strdup("2147483648");
+		*neg = 1;
+	}
+	else
+	{
+		*neg = handle_neg(num);
+		tmp = ft_itoa((int)*num);
+	}
+	return (tmp);
+}
+
 int int_case(t_print *tab)
 {
     char	*tmp;
     long long int 	num;
 	int		len;
-    int		padding;
-	int		neg;
 	int		written;
+    int neg;
 
 	written = 0;
-   num = va_arg(tab->args, int);
-	if (num == INT_MIN)
-	{
-		tmp = ft_strdup("2147483648");
-		neg = 1;
-	}
-	else
-	{
-		neg = handle_neg(&num);
-		tmp = ft_itoa((int)num);
-	}
-    len = prec(tab, tmp, num);
-    padding = get_padding(tab, len, neg);
-    written = print_padd_sign(tab, padding, neg);
-    written += print_num_space(tab, tmp, len, padding);
+    num = va_arg(tab->args, int);
+	tmp = get_int_string(&num, &neg);
+    len = prec(tab, tmp, num); 
+    written = print_padd_sign(tab, get_padding(tab, len, neg), neg);
+    written += print_num_space(tab, tmp, len, get_padding(tab, len, neg));
     free(tmp);
     tab->total_length += written;
     return (written);
