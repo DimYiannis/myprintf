@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/27 23:47:44 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/28 19:18:29 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ unsigned long	decide_conv(const char *c, t_print *tab)
 	else if (*c == 'u')
 		i += unsigned_case(tab);
 	else if (*c == '%')
-		i += percent_case(tab, *c);
+		i += percent_case(tab);
 	return (i);
 }
 
