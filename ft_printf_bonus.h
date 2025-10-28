@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:17:48 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 23:59:40 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 00:16:26 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,8 @@ char			*ft_unsigneditoa(unsigned int n);
 int	count_decimal_digits(unsigned int n);
 int	print_hex_right(t_print *tab, char *tmp, unsigned int num, t_hexinfo info);
 int	print_hex_left(char *tmp, unsigned int num, t_hexinfo info);
+int handle_neg(long long *num);
+int get_padding(t_print *tab, int len, int neg);
+int print_num_space(t_print *tab, char *tmp, int len, int padding);
 
 #endif

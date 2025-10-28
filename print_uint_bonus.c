@@ -6,13 +6,13 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:52 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 23:50:18 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 00:16:58 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int get_padding(t_print *tab, int len)
+static int getting_padding(t_print *tab, int len)
 {
 	int padding;
 
@@ -76,7 +76,7 @@ int	unsigned_case(t_print *tab)
 	if (!tmp)
 		return (0);
 	len = prec(tab, tmp, num);
-	padding = get_padding(tab, len);
+	padding = getting_padding(tab, len);
 	if (tab->dash)
 		written = print_left(tab, tmp, len, padding);
 	else
