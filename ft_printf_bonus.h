@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:17:48 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 19:18:10 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/28 23:59:40 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,11 @@ int				unsigned_case(t_print *tab);
 int				percent_case(t_print *tab);
 int				ft_printf(const char *type, ...);
 unsigned int	eval_format(const char *c, t_print *tab);
-int				width_zero(t_print *tab, char *tmp, int len);
-int				prec(t_print *tab, char *tmp, int len);
-int				dash_prec(t_print *tab, char *tmp, int len);
-int				width_prec(t_print *tab, char *tmp, int len);
-int				dash_prec(t_print *tab, char *tmp, int len);
-unsigned int	hashflag(t_print *tab, unsigned int n, char c);
 unsigned int	putchar_n(char c, unsigned int n);
 unsigned int	putstring_n(char *s, unsigned int n);
-unsigned int	no_hashflag(t_print *tab, unsigned int n, char c);
-int				hash_dash_width_prec(t_print *tab, unsigned int n, char c);
-int				dash_width_prec(t_print *tab, char *tmp, int len);
 char			*ft_unsigneditoa(unsigned int n);
 int	count_decimal_digits(unsigned int n);
 int	print_hex_right(t_print *tab, char *tmp, unsigned int num, t_hexinfo info);
 int	print_hex_left(char *tmp, unsigned int num, t_hexinfo info);
-int	print_main(char *tmp, int len, int zeros);
-int	print_prefix(unsigned int num, int upper, int hash);
-
-
-
 
 #endif
