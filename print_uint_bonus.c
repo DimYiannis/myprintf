@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:52 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 18:35:33 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/28 22:07:24 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	count_decimal_digits(unsigned int n)
 	count = 0;
 	while (n > 0)
 	{
-		n /= 10;  // Divide by 10 for DECIMAL digits
+		n /= 10;
 		count++;
 	}
 	return (count);
