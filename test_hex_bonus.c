@@ -17,8 +17,66 @@ int main(void)
     unsigned int x = 3735928559u;
     char *s = "Hello";
 
-int ft_len;
+    int	ft_len;
     int real_len;
+	int	std_len;
+
+	printf("=== BASIC TESTS (no formatting) ===\n\n");
+
+	// %c
+	printf("Test %%c:\n");
+	ft_len = ft_printf("ft_printf: %c\n", 'A');
+	std_len = printf("printf   : %c\n", 'A');
+	printf("ft_len = %d | std_len = %d\n\n", ft_len, std_len);
+
+	// %s
+	printf("Test %%s:\n");
+	ft_len = ft_printf("ft_printf: %s\n", "Hello, world!");
+	std_len = printf("printf   : %s\n", "Hello, world!");
+	printf("ft_len = %d | std_len = %d\n\n", ft_len, std_len);
+
+	// %p
+	printf("Test %%p:\n");
+	void *ptr = (void *)0x1234abcd;
+	ft_len = ft_printf("ft_printf: %p\n", ptr);
+	std_len = printf("printf   : %p\n", ptr);
+	printf("ft_len = %d | std_len = %d\n\n", ft_len, std_len);
+
+	// %d
+	printf("Test %%d:\n");
+	ft_len = ft_printf("ft_printf: %d\n", -12345);
+	std_len = printf("printf   : %d\n", -12345);
+	printf("ft_len = %d | std_len = %d\n\n", ft_len, std_len);
+
+	// %i
+	printf("Test %%i:\n");
+	ft_len = ft_printf("ft_printf: %i\n", 42);
+	std_len = printf("printf   : %i\n", 42);
+	printf("ft_len = %d | std_len = %d\n\n", ft_len, std_len);
+
+	// %u
+	printf("Test %%u:\n");
+	ft_len = ft_printf("ft_printf: %u\n", 4294967295u);
+	std_len = printf("printf   : %u\n", 4294967295u);
+	printf("ft_len = %d | std_len = %d\n\n", ft_len, std_len);
+
+	// %x
+	printf("Test %%x:\n");
+	ft_len = ft_printf("ft_printf: %x\n", 305441741);
+	std_len = printf("printf   : %x\n", 305441741);
+	printf("ft_len = %d | std_len = %d\n\n", ft_len, std_len);
+
+	// %X
+	printf("Test %%X:\n");
+	ft_len = ft_printf("ft_printf: %X\n", 305441741);
+	std_len = printf("printf   : %X\n", 305441741);
+	printf("ft_len = %d | std_len = %d\n\n", ft_len, std_len);
+
+	// %%
+	printf("Test %%%%:\n");
+	ft_len = ft_printf("ft_printf: %%\n");
+	std_len = printf("printf   : %%\n");
+	printf("ft_len = %d | std_len = %d\n\n", ft_len, std_len);
 
     // 1️⃣ Test 1: "%5%"
     printf("=== Test 1: \"%%5%%\" ===\n");
