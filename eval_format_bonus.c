@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 19:18:29 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/28 20:32:35 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	check_flags(t_print *tab, const char *c)
 		else if (c[i] == '0')
 			tab->zero = 1;
 		else
-			break;  // Not a recognized flag character
+			break;
 		i++;
 	}
 	return (i);
