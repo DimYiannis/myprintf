@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 13:12:27 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:08:20 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_ptrputnbr(unsigned long n)
 	int		len;
 
 	len = 0;
-	digits = "0123456789ABCDEF";
+	digits = "0123456789abcdef";
 	if (n >= 16)
 		len += ft_ptrputnbr(n / 16);
 	len += write(1, &digits[n % 16], 1);
@@ -40,30 +40,67 @@ static int	count_hex_digits(uintptr_t n)
 	return (count);
 }
 
+static int print_null(t_print *tab)
+{
+	int padding;
+	int len;
+
+	len = 5;
+	padding = 0;
+	if (tab->width > len)
+		padding = tab->width - len;
+	if (tab->dash)
+	{
+		write(1, "(nil)", 5);
+		len += putchar_n(' ', padding);
+	}
+	else
+	{
+		len += putchar_n(' ', padding);
+		write(1, "(nil)", 5);
+	}
+	tab->total_length += len;
+	return (len);
+}
+
+static int print_addr(t_print *tab, uintptr_t addr)
+{
+	int padding;
+	int written;
+	int addr_len;
+
+	addr_len = 2 + count_hex_digits(addr);
+	padding = 0;
+	if (tab->width > addr_len)
+		padding = tab->width - addr_len;
+	written = 0;
+	if (tab->dash)
+	{
+		written += write(1,"0x", 2);
+		written += ft_ptrputnbr(addr);
+		written += putchar_n(' ', padding);
+	}
+	else
+	{
+		written += putchar_n(' ', padding);
+		written += write(1,"0x", 2);
+		written += ft_ptrputnbr(addr);	
+	}
+	return (written);
+}
+
 int	pointer_case(t_print *tab)
 {
 	void *ptr;
-	int len;
 	uintptr_t addr;
-	int padding;
 	int written;
 	
-	ptr = va_arg(tab->args, void *);
-	addr = (uintptr_t)ptr;
-	padding = 0;
 	written = 0;
-	if (!addr)
-			return (write(1, "(nil)", 5));
-	len = 2 + count_hex_digits(addr);
-	if (len < tab->width)
-		padding = tab->width - len;
-	if (!tab->dash)
-		written += putchar_n(' ', padding);
-	
-	written += write(1, "0x", 2);
-	written += ft_ptrputnbr(addr);
-	if (tab->dash)
-		written += putchar_n(' ', padding);
+	ptr = va_arg(tab->args, void *);
+	if (!ptr)
+		return (print_null(tab));
+	addr = (uintptr_t)ptr;
+	written = print_addr(tab, addr);
 	tab->total_length += written;
 	return (written);
 }
