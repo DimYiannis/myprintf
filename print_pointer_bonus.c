@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/27 23:11:48 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:12:27 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,24 @@ int	pointer_case(t_print *tab)
 	int len;
 	uintptr_t addr;
 	int padding;
+	int written;
 	
 	ptr = va_arg(tab->args, void *);
 	addr = (uintptr_t)ptr;
 	padding = 0;
+	written = 0;
 	if (!addr)
 			return (write(1, "(nil)", 5));
 	len = 2 + count_hex_digits(addr);
 	if (len < tab->width)
 		padding = tab->width - len;
+	if (!tab->dash)
+		written += putchar_n(' ', padding);
+	
+	written += write(1, "0x", 2);
+	written += ft_ptrputnbr(addr);
 	if (tab->dash)
-	{
-		len = write(1, "0x", 2);
-		len += ft_ptrputnbr(addr);
-		return (len + putchar_n(' ', padding));
-	}
-	else
-	{
-		len =putchar_n(' ', padding);
-		len += write(1, "0x", 2);
-		return (len + ft_ptrputnbr(addr));
-	}
+		written += putchar_n(' ', padding);
+	tab->total_length += written;
+	return (written);
 }
