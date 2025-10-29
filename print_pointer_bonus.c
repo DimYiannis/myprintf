@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 14:08:20 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 09:30:19 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	ft_ptrputnbr(unsigned long n)
 
 static int	count_hex_digits(uintptr_t n)
 {
-	int count;
-	
+	int	count;
+
 	if (n == 0)
 		return (1);
 	count = 0;
@@ -40,10 +40,10 @@ static int	count_hex_digits(uintptr_t n)
 	return (count);
 }
 
-static int print_null(t_print *tab)
+static int	print_null(t_print *tab)
 {
-	int padding;
-	int len;
+	int	padding;
+	int	len;
 
 	len = 5;
 	padding = 0;
@@ -63,11 +63,11 @@ static int print_null(t_print *tab)
 	return (len);
 }
 
-static int print_addr(t_print *tab, uintptr_t addr)
+static int	print_addr(t_print *tab, uintptr_t addr)
 {
-	int padding;
-	int written;
-	int addr_len;
+	int	padding;
+	int	written;
+	int	addr_len;
 
 	addr_len = 2 + count_hex_digits(addr);
 	padding = 0;
@@ -76,25 +76,25 @@ static int print_addr(t_print *tab, uintptr_t addr)
 	written = 0;
 	if (tab->dash)
 	{
-		written += write(1,"0x", 2);
+		written += write(1, "0x", 2);
 		written += ft_ptrputnbr(addr);
 		written += putchar_n(' ', padding);
 	}
 	else
 	{
 		written += putchar_n(' ', padding);
-		written += write(1,"0x", 2);
-		written += ft_ptrputnbr(addr);	
+		written += write(1, "0x", 2);
+		written += ft_ptrputnbr(addr);
 	}
 	return (written);
 }
 
 int	pointer_case(t_print *tab)
 {
-	void *ptr;
-	uintptr_t addr;
-	int written;
-	
+	void		*ptr;
+	uintptr_t	addr;
+	int			written;
+
 	written = 0;
 	ptr = va_arg(tab->args, void *);
 	if (!ptr)

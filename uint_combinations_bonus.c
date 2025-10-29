@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:14:46 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 23:32:46 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 09:32:59 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	count_decimal_digits(unsigned int n)
 {
-	int count;
-	
+	int	count;
+
 	if (n == 0)
 		return (1);
 	count = 0;
@@ -36,7 +36,7 @@ char	*ft_unsigneditoa(unsigned int n)
 	s = malloc(len + 1);
 	if (!s)
 		return (NULL);
-	s[len] = '\0';	
+	s[len] = '\0';
 	if (n == 0)
 	{
 		s[0] = '0';

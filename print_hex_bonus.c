@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:41 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 19:14:50 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 09:30:09 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	count_hex_digits(unsigned int n)
 {
-	int count;
+	int	count;
 
 	if (n == 0)
 		return (1);
@@ -29,7 +29,7 @@ static int	count_hex_digits(unsigned int n)
 
 static void	fill_hex_string(char *s, unsigned int n, char *digits, int len)
 {
-	int i;
+	int	i;
 
 	i = len;
 	while (i > 0)
@@ -62,9 +62,10 @@ static char	*ft_hextoa(unsigned int n, int upper)
 	return (s);
 }
 
-static t_hexinfo	compute_hexinfo(t_print *tab, unsigned int num, int upper, int len)
+static t_hexinfo	compute_hexinfo(t_print *tab, unsigned int num, int upper,
+		int len)
 {
-	t_hexinfo info;
+	t_hexinfo	info;
 
 	info.upper = upper;
 	info.len = len;
@@ -88,7 +89,7 @@ int	hex_case(t_print *tab, const char *c)
 	unsigned int	num;
 	t_hexinfo		info;
 	int				written;
-	int len;
+	int				len;
 
 	num = va_arg(tab->args, unsigned int);
 	info.upper = (*c == 'X');

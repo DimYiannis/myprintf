@@ -6,15 +6,15 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:49 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 22:19:59 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 09:28:28 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int compute_string(char **s, t_print *tab)
+static int	compute_string(char **s, t_print *tab)
 {
-	int len;
+	int	len;
 
 	*s = va_arg(tab->args, char *);
 	if (!*s)
@@ -32,16 +32,16 @@ static int compute_string(char **s, t_print *tab)
 
 int	string_case(t_print *tab)
 {
-	int len;
-	int padding;
-	char *s;
+	int		len;
+	int		padding;
+	char	*s;
 
 	len = compute_string(&s, tab);
 	padding = 0;
 	if (tab->width > len)
 		padding = tab->width - len;
 	if (!tab->dash && padding > 0)
-        tab->total_length += putchar_n(' ', padding);
+		tab->total_length += putchar_n(' ', padding);
 	tab->total_length += putstring_n(s, len);
 	if (tab->dash && padding > 0)
 		tab->total_length += putchar_n(' ', padding);

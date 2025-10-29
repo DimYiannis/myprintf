@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 23:58:58 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/29 00:01:28 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 09:32:25 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	print_prefix(unsigned int num, int upper, int hash)
 
 static int	print_main(char *tmp, int len, int zeros)
 {
-	int written;
+	int	written;
 
 	written = 0;
 	written += putchar_n('0', zeros);
@@ -31,10 +31,9 @@ static int	print_main(char *tmp, int len, int zeros)
 	return (written);
 }
 
-
 int	print_hex_left(char *tmp, unsigned int num, t_hexinfo info)
 {
-	int written;
+	int	written;
 
 	written = 0;
 	written += print_prefix(num, info.upper, info.prefix);
@@ -45,7 +44,7 @@ int	print_hex_left(char *tmp, unsigned int num, t_hexinfo info)
 
 int	print_hex_right(t_print *tab, char *tmp, unsigned int num, t_hexinfo info)
 {
-	int written;
+	int	written;
 
 	written = 0;
 	if (!tab->zero || tab->precision >= 0)

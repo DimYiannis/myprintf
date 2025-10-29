@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:14:29 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 20:32:35 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 09:29:09 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				check_width_precision(t_print *tab, const char *c);
 unsigned long	decide_conv(const char *c, t_print *tab);
-int	check_flags(t_print *tab, const char *c);
+int				check_flags(t_print *tab, const char *c);
 
 unsigned int	eval_format(const char *c, t_print *tab)
 {
@@ -99,9 +99,8 @@ int	check_flags(t_print *tab, const char *c)
 		else if (c[i] == '0')
 			tab->zero = 1;
 		else
-			break;
+			break ;
 		i++;
 	}
 	return (i);
 }
-

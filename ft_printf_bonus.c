@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/28 20:31:17 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 09:29:36 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ static t_print	*tab_initialise(t_print *tab)
 	tab->is_zero = 0;
 	return (tab);
 }
+
 int	ft_printf(const char *type, ...)
 {
 	t_print	*tab;
 	int		i;
-	int counter;
+	int		counter;
 
 	tab = malloc(sizeof(t_print));
 	if (!tab)
@@ -40,9 +41,9 @@ int	ft_printf(const char *type, ...)
 	while (type[i])
 	{
 		if (type[i] == '%' && type[i + 1])
-			i += eval_format(&type[i + 1], tab);	
+			i += eval_format(&type[i + 1], tab);
 		else
-			tab->total_length += write(1, &type[i], 1);	
+			tab->total_length += write(1, &type[i], 1);
 		i++;
 	}
 	va_end(tab->args);
@@ -51,26 +52,30 @@ int	ft_printf(const char *type, ...)
 	return (counter);
 }
 
-unsigned int putchar_n(char c, unsigned int n)
+unsigned int	putchar_n(char c, unsigned int n)
 {
-    unsigned int i = 0;
-    while (i < n)
-    {
-        write(1, &c, 1);
-        i++;
-    }
-    return i;
+	unsigned int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		write(1, &c, 1);
+		i++;
+	}
+	return (i);
 }
 
-unsigned int putstring_n(char *s, unsigned int n)
+unsigned int	putstring_n(char *s, unsigned int n)
 {
-    unsigned int i = 0;
+	unsigned int	i;
+
+	i = 0;
 	if (!s || n == 0)
-        return 0;
-    while (s[i] && i < n)
-    {
-        write(1, &s[i], 1);
-        i++;
-    }
-    return i;
+		return (0);
+	while (s[i] && i < n)
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
 }

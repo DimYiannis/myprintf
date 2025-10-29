@@ -6,15 +6,15 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:52 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/29 00:16:58 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 09:28:41 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int getting_padding(t_print *tab, int len)
+static int	getting_padding(t_print *tab, int len)
 {
-	int padding;
+	int	padding;
 
 	padding = tab->width - (len + tab->is_zero);
 	if (padding < 0)
@@ -22,19 +22,19 @@ static int getting_padding(t_print *tab, int len)
 	return (padding);
 }
 
-static int print_left(t_print *tab, char *tmp, int len, int padding)
+static int	print_left(t_print *tab, char *tmp, int len, int padding)
 {
-	int written;
+	int	written;
 
 	written = putchar_n('0', tab->is_zero);
 	written += putstring_n(tmp, len);
 	written += putchar_n(' ', padding);
 	return (written);
 }
- 
-static int print_right(t_print *tab, char *tmp, int len, int padding)
+
+static int	print_right(t_print *tab, char *tmp, int len, int padding)
 {
-	int written;
+	int	written;
 
 	written = 0;
 	if (!tab->zero || tab->precision >= 0)
@@ -46,9 +46,9 @@ static int print_right(t_print *tab, char *tmp, int len, int padding)
 	return (written);
 }
 
-static int prec(t_print *tab, char *tmp, unsigned int num)
+static int	prec(t_print *tab, char *tmp, unsigned int num)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(tmp);
 	if (tab->precision == 0 && num == 0)
@@ -56,7 +56,7 @@ static int prec(t_print *tab, char *tmp, unsigned int num)
 		len = 0;
 		tmp[0] = '\0';
 	}
-	if (tab->precision > len) 
+	if (tab->precision > len)
 		tab->is_zero = tab->precision - len;
 	else
 		tab->is_zero = 0;
@@ -85,4 +85,3 @@ int	unsigned_case(t_print *tab)
 	tab->total_length += written;
 	return (written);
 }
-
