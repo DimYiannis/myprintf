@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:41 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/29 09:30:09 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:12:11 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,19 @@ static t_hexinfo	compute_hexinfo(t_print *tab, unsigned int num, int upper,
 {
 	t_hexinfo	info;
 
-	info.upper = upper;
-	info.len = len;
+	info->upper = upper;
+	info->len = len;
 	if (tab->precision == 0 && num == 0)
-		info.len = 0;
-	info.zeros = 0;
-	if (tab->precision > info.len)
-		info.zeros = tab->precision - info.len;
-	info.prefix = 0;
+		info->len = 0;
+	info->zeros = 0;
+	if (tab->precision > info->len)
+		info->zeros = tab->precision - info->len;
+	info->prefix = 0;
 	if (tab->hash && num != 0)
-		info.prefix = 2;
-	info.padding = tab->width - (info.len + info.zeros + info.prefix);
-	if (info.padding < 0)
-		info.padding = 0;
+		info->prefix = 2;
+	info->padding = tab->width - (info->len + info->zeros + info->prefix);
+	if (info->padding < 0)
+		info->padding = 0;
 	return (info);
 }
 
@@ -92,14 +92,17 @@ int	hex_case(t_print *tab, const char *c)
 	int				len;
 
 	num = va_arg(tab->args, unsigned int);
-	info.upper = (*c == 'X');
-	tmp = ft_hextoa(num, info.upper);
+	if (*c == 'X')
+		info->upper = 1;
+	else
+		info->upper = 0;
+	tmp = ft_hextoa(num, info->upper);
 	if (!tmp)
 		return (0);
 	len = ft_strlen(tmp);
 	if (tab->precision == 0 && num == 0)
 		tmp[0] = '\0';
-	info = compute_hexinfo(tab, num, info.upper, len);
+	info = compute_hexinfo(tab, num, info->upper, len);
 	if (tab->dash)
 		written = print_hex_left(tmp, num, info);
 	else
