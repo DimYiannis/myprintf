@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 09:54:49 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/29 09:28:28 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 10:47:21 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static int	compute_string(char **s, t_print *tab)
 	*s = va_arg(tab->args, char *);
 	if (!*s)
 	{
-		if (tab->precision >= 0 && tab->precision < 6)
+		if (tab->precision == 0)
+			*s = "";
+		else if (tab->precision >= 0 && tab->precision < 6)
 			*s = "";
 		else
 			*s = "(null)";
