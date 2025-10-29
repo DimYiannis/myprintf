@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/22 08:30:25 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:23:46 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,21 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
+
+static int	putstring_n(char *s, int n)
+{
+	int	i;
+
+	i = 0;
+	if (!s || n == 0)
+		return (0);
+	while (s[i] && i < n)
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
+}
 
 static int	intandc_case(va_list *args, char c)
 {
@@ -52,7 +67,7 @@ static int	unsignedandhex_case(va_list *args, char c)
 	{
 		tmp = ft_unsigneditoa(va_arg(*args, unsigned int));
 		len = ft_strlen(tmp);
-		write(1, tmp, len);
+		putstring_n(tmp, len);
 		free(tmp);
 		return (len);
 	}
@@ -79,7 +94,7 @@ static int	rest_cases(va_list *args, char c)
 		if (!tmp)
 			tmp = "(null)";
 		len = ft_strlen(tmp);
-		return (write(1, tmp, len));
+		return (putstring_n(tmp, len));
 	}
 	else if (c == 'p')
 	{
