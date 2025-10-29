@@ -2,17 +2,14 @@
 #include <limits.h>
 #include <stdio.h>
 
-#define TEST(fmt, val)
-
-do
-{
-	int n1 = printf("printf:    |" fmt "|\n", val);
-	int n2 = ft_printf("ft_printf: |" fmt "|\n", val);
-	printf("Return: printf=%d, ft_printf=%d\n\n", n1, n2);
+#define TEST(fmt, val) \
+do { \
+    int n1 = printf("printf:    |" fmt "|\n", val); \
+    int n2 = ft_printf("ft_printf: |" fmt "|\n", val); \
+    printf("Return: printf=%d, ft_printf=%d\n\n", n1, n2); \
 } while (0)
 
-	int
-	main(void)
+int main(void)
 {
 	int				d;
 	unsigned int	n;
