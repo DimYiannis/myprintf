@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 11:16:10 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/29 09:29:36 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:59:24 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	ft_printf(const char *type, ...)
 		return (-1);
 	tab_initialise(tab);
 	i = 0;
+	if (!type)
+		return (-1);
 	va_start(tab->args, type);
 	while (type[i])
 	{

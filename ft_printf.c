@@ -6,7 +6,7 @@
 /*   By: ydimitra <ydimitra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:22:42 by ydimitra          #+#    #+#             */
-/*   Updated: 2025/10/29 16:23:46 by ydimitra         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:59:05 by ydimitra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,11 @@ int	ft_printf(const char *type, ...)
 	size_t	i;
 
 	count = 0;
-	i = 0;
+	i = -1;
+	if (!type)
+		return (-1);
 	va_start(args, type);
-	while (type[i])
+	while (type[++i])
 	{
 		if (type[i] == '%' && type[i + 1])
 		{
@@ -129,8 +131,6 @@ int	ft_printf(const char *type, ...)
 		}
 		else
 			count += write(1, &type[i], 1);
-		i++;
 	}
-	va_end(args);
-	return (count);
+	return (va_end(args), count);
 }
